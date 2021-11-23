@@ -13,8 +13,6 @@ const Routes = (props: IRoutesProps) => {
 
     const { signed } = useSelector(selectUser);
 
-    // const { pathname } = useLocation();
-
     return (
         <BrowserRouter basename={props.isLocalhost ? props.basename : undefined}>
             <AnimatePresence exitBeforeEnter>

@@ -9,11 +9,10 @@ import { Button } from "components/button";
 import { Field } from "components/form/field";
 import { Input } from "components/form/input";
 import { selectIsLoading } from "features/notify/selectors";
+import user from "features/user";
 import { LoginLayout } from "layouts/LoginLayout"
 import { schema } from "./schema";
 import { $Form } from "./styles";
-import interfaceState from 'features/interfaceState';
-import { NavLink } from 'react-router-dom';
 
 /**
  * I am the login page
@@ -34,12 +33,11 @@ export const LoginPage = () => {
     // handle form submit
     const onSubmit = (data: any): void => {
         // dispatch action to login user
-        console.log(data);
+        dispatch(user.actions.update({
+            username: data.username,
+            signed: true,
+          }));
     };
-
-    const changeTheme = () => {
-        dispatch(interfaceState.actions.switchTheme({}));
-    }
 
     return (
         <LoginLayout leftImage={LoginImage}>
@@ -57,9 +55,6 @@ export const LoginPage = () => {
                     {isLoading ? 'Entrando...' : 'Entrar'}
                 </Button>
             </$Form>
-            <button onClick={changeTheme}>
-                TROCAR THEME
-            </button>
         </LoginLayout>
     )
 }
