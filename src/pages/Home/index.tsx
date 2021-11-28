@@ -3,23 +3,22 @@
  */
 import { useDispatch } from "react-redux";
 import interfaceState from 'features/interfaceState';
+import { Content } from "layouts/MainLayout/content";
+import { Title } from "components/title";
 
 /**
  * I am the Home Page
  */
 export const Home = () => {
-    const dispatch = useDispatch();
-
-
-    const changeTheme = () => {
-        dispatch(interfaceState.actions.switchTheme({}));
-    }
 
     return (
-        <>
-            <button onClick={changeTheme} style={{ background: "white" }}>
-                TROCAR THEME
-            </button>
-        </>
+        <Content fixed={
+            <Title
+                title="Escolha um serviço"
+                subtitle="Você também pode filtrar por categorias"
+            />
+        }>
+
+        </Content>
     )
 }

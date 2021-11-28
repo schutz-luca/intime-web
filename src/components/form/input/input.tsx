@@ -23,7 +23,7 @@ const Input = (props: IProps): React.ReactElement => {
           {(inputProps) => <BaseInput {...inputProps} />}
         </InputMask>
       )}
-      name={props.name}
+      name={props.name || ''}
       control={props.control}
       defaultValue={props.defaultValue}
     />

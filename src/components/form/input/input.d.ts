@@ -7,4 +7,5 @@ export interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   innerRef?: LegacyRef<HTMLInputElement>
   mask?: string | Array<(string | RegExp)>
   maskChar?: any
+  icon?: JSX.Element
 }

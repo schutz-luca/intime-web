@@ -38,8 +38,12 @@ const BaseInput = (props: IProps): React.ReactElement => {
     );
   };
 
+  const Icon = () => (<> {props.icon}</>)
+
   return (
-    <$Input>
+    <$Input >
+      {props.icon && <$Icon className={props.icon && 'icon'}><Icon /></$Icon>}
+
       <input {...props} type={type} ref={props.innerRef} />
 
       {passwordIcon()}

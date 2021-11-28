@@ -20,6 +20,15 @@ const $Icon = styled.span`
   right: 0;
   top: 0;
 
+  &.icon{
+    color: ${props=>props.theme.neutral6};
+    
+    &:hover{
+      transform: none;
+      cursor: unset;
+    }
+  }
+
   &:hover {
     transform: scale(1.1);
     transition: all 0.2s ease-in-out;
@@ -34,6 +43,7 @@ const $Input = styled.div`
   border: 2px solid ${props => props.theme.neutral5}90;
   border-radius: 15px;
   transition: border-color 0.2s ease-in-out;
+  position: relative;
 
   &:focus-within{
     border-color: ${props => props.theme.primary};

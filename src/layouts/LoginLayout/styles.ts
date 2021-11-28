@@ -1,5 +1,7 @@
+/**
+ * IMPORTS
+ */
 import styled from "styled-components";
-import { Button } from "components/button";
 import { motion } from "framer-motion";
 import { devices } from "styles/devices";
 
@@ -31,24 +33,6 @@ export const $Logo = styled.img`
     @media ${devices.mobileM}{
         width: 60px;
         height: 60px;
-    }
-`
-
-export const $ThemeButton = styled(Button)`
-    border-radius: 50%;
-    background: ${props => props.theme.neutral7};
-    color: ${props => props.theme.neutral2};
-    position: absolute;
-    z-index: 2;
-    width: 50px;
-    height: 50px;
-    right: 10px;
-    top: 10px;
-    padding: 5px;
-
-    svg{
-        height: 100%;
-        width: 100%;
     }
 `
 

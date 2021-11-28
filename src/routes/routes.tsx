@@ -8,6 +8,7 @@ import { Home } from "pages/Home";
 import { BrowserRouter, Route } from "react-router-dom";
 import { IRoutesProps } from "./routes.d";
 import { LoginPage } from 'pages/LoginPage';
+import { MainLayout } from 'layouts/MainLayout';
 
 const Routes = (props: IRoutesProps) => {
 
@@ -23,9 +24,9 @@ const Routes = (props: IRoutesProps) => {
                     exit="exit"
                 >
                     {signed ?
-                        <>
+                        <MainLayout>
                             <Route path="/" exact component={Home} />
-                        </>
+                        </MainLayout>
                         :
                         <>
                             <Route path="/" exact component={LoginPage} />
