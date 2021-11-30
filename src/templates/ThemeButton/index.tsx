@@ -6,11 +6,16 @@ import { $ThemeButton } from "./styles";
 import { selectIsDarkTheme } from "features/interfaceState/selectors";
 import interfaceState from "features/interfaceState";
 import { useDispatch, useSelector } from "react-redux";
+import { IThemeButtonProps } from "./index.d";
+
+const defaultProps: IThemeButtonProps = {
+    absolute: true
+}
 
 /**
  * I am the switch theme mode button
  */
-export const ThemeButton = () => {
+export const ThemeButton = (props: IThemeButtonProps) => {
 
     const dispatch = useDispatch();
 
@@ -21,7 +26,7 @@ export const ThemeButton = () => {
     }
 
     return (
-        <$ThemeButton onClick={changeTheme}>
+        <$ThemeButton onClick={changeTheme} style={{ position: props.absolute ? 'absolute' : 'unset' }}>
             {isDarkTheme ?
                 <MdLightMode />
                 :
@@ -30,3 +35,5 @@ export const ThemeButton = () => {
         </$ThemeButton>
     )
 }
+
+ThemeButton.defaultProps = defaultProps;

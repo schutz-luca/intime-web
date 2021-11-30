@@ -79,7 +79,6 @@ export const $RightContent = styled(motion.div)`
     background: ${props => props.theme.background};
     padding: 20px;
     border-radius: 15px;
-    height: 600px;
     width: 500px;
     z-index: 1;
     box-shadow: 0px 1px 4px rgb(0 0 0 / 5%), 0px 4px 16px ${props => props.theme.neutral5}90;

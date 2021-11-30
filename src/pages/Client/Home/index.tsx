@@ -9,7 +9,7 @@ import { Title } from "components/title";
 /**
  * I am the Home Page
  */
-export const Home = () => {
+export const ClientHome = () => {
 
     return (
         <Content fixed={

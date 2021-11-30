@@ -1,19 +1,26 @@
 /**
  * IMPORTS
  */
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdOutlineMenu } from "react-icons/md";
 import Logo from "assets/logo.svg";
 import useLogout from "hooks/useLogout";
 import { ThemeButton } from "templates/ThemeButton";
-import { $Logo, $MenuButton, $SearchField, $TopMenuContainer, $TopMenuContent } from "./styles";
-import { Field } from "components/form/field";
-import { Input } from "components/form/input";
-import { FiSearch } from "react-icons/fi";
+import { useState } from "react";
+import { ITopMenuProps } from "./index.d";
+import { $Logo, $MenuButton, $MenuOption, $SearchField, $TopMenuContainer, $TopMenuContent } from "./styles";
+import { Option } from "./option";
+import { NavLink } from "react-router-dom";
 
 /**
  * I am the top menu
  */
-export const TopMenu = () => {
+export const TopMenu = (props: ITopMenuProps) => {
+
+    const [isOptionsOpen, setIsOptionOpen] = useState(false);
+
+    const handleOpenMenu = () => {
+        setIsOptionOpen(!isOptionsOpen);
+    }
 
     const logout = useLogout();
 
@@ -21,17 +28,19 @@ export const TopMenu = () => {
         <$TopMenuContainer>
             <$TopMenuContent>
 
-                <$Logo src={Logo} alt="logo" />
+                <NavLink to="/"><$Logo src={Logo} alt="logo" /></NavLink>
 
-                <ThemeButton />
+                {props.options.map(Option)}
 
-                <$SearchField>
+                {/* <$SearchField>
                     <Input name="search" placeholder="Pesquisar" icon={<FiSearch />} />
-                </$SearchField>
+                </$SearchField> */}
 
                 <$MenuButton onClick={logout}>
                     <MdLogout />
                 </$MenuButton>
+
+                <ThemeButton absolute={false} />
 
             </$TopMenuContent>
         </$TopMenuContainer>

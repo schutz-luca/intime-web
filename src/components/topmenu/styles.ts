@@ -25,7 +25,7 @@ export const $TopMenuContent = styled.div`
     align-items: center;
     width: 100%;
     margin: auto;
-    padding: 0 100px;
+    padding: 0 200px;
 `
 
 export const $Logo = styled.img`
@@ -47,6 +47,24 @@ export const $MenuButton = styled(Button)`
     svg{
         height: 100%;
         width: 100%;
+    }
+`
+
+export const $MenuOption = styled($MenuButton)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 0 8px;
+    height: auto;
+    width: auto;
+    svg{
+        padding: 8px 0;
+        width: 40px;
+        height: 40px;
+    }
+    p{
+        font-size: 11;
     }
 `
 

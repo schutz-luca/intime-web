@@ -2,12 +2,12 @@
  * User state interface.
  */
 export interface INotifyState {
-  kind?: notifyKind
+  kind?: NotifyEnum
   title?: string
   detail?: string
 }
 
-export enum notifyKind {
+export enum NotifyEnum {
   ERROR = 'error',
   SUCCESS = 'success',
   LOADING = 'loading'

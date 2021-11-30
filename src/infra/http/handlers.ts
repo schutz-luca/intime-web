@@ -2,7 +2,7 @@
  * IMPORTS
  */
 import notify from 'features/notify';
-import { notifyKind } from 'features/notify/index.d';
+import { NotifyEnum } from 'features/notify/index.d';
 
 
 /**
@@ -12,15 +12,15 @@ const handleError =
   async (exception, data, dispatch): Promise<unknown> => {
     // data available: notify and return
     if (data !== undefined) {
-      return dispatch(notify.actions.update({ ...data, kind: notifyKind.ERROR }));
+      return dispatch(notify.actions.update({ ...data, kind: NotifyEnum.ERROR }));
     }
 
     try {
       // get error details
       const error = await exception.json();
       // dispatch action to notify error
-      dispatch(notify.actions.update({ ...error, kind: notifyKind.ERROR }));
-    } catch (e) {
+      dispatch(notify.actions.update({ ...error, kind: NotifyEnum.ERROR }));
+    } catch (ex) {
       // dispatch action to notify failed request
       dispatch(notify.actions.update({
         title: import.meta.env.VITE_ERROR_REQUEST_FAILED
@@ -37,7 +37,7 @@ const handleSuccess = (data, dispatch): void => {
   if (data === undefined) return;
 
   // dispatch action to notify success
-  dispatch(notify.actions.update({ ...data, kind: notifyKind.SUCCESS }));
+  dispatch(notify.actions.update({ ...data, kind: NotifyEnum.SUCCESS }));
 };
 
 

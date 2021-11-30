@@ -4,7 +4,6 @@
 export const defaultHeaders = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
-  'X-API-Key': process.env.VITE_API_KEY,
 };
 
 

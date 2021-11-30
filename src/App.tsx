@@ -1,13 +1,13 @@
 /**
  * IMPORTS
  */
+import 'animate.css';
+import 'react-notifications-component/dist/theme.css'
+import ReactNotification from 'react-notifications-component'
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "styles/theme";
 import GlobalStyle from "styles/global";
-import { Provider, useSelector } from 'react-redux';
-import { persistor, store } from './state/store';
-import { useContext } from "react";
-import { PersistGate } from 'redux-persist/integration/react';
+import { useSelector } from 'react-redux';
 import { RoutesLoader } from "routes";
 import { selectIsDarkTheme } from "features/interfaceState/selectors";
 
@@ -20,10 +20,9 @@ export function App() {
   return (
 
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
-      
-          <RoutesLoader />
-          <GlobalStyle />
-        
+      <ReactNotification />
+      <RoutesLoader />
+      <GlobalStyle />
     </ThemeProvider >
 
   )

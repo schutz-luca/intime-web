@@ -6,7 +6,11 @@ export interface IUserState {
   name: string,
   email: string,
   signed: boolean,
-  role: TRole | null
+  role: RoleEnum | null
 }
 
-type TRole = 'admin' | 'provider' | 'client'
+export enum RoleEnum {
+  ADMIN = 'admin',
+  PROVIDER = 'provider',
+  CLIENT = 'client'
+}

@@ -2,7 +2,7 @@
  * IMPORTS
  */
 import notify from 'features/notify';
-import { notifyKind } from 'features/notify/index.d';
+import { NotifyEnum } from 'features/notify/index.d';
 import { handleError, handleSuccess } from './handlers';
 import { defaultHeaders, methods } from './http.d';
 
@@ -27,7 +27,7 @@ const doFetch = async (url: string, config?: any): Promise<any> => {
   // execute request
   try {
     // set loading state
-    dispatch(notify.actions.update({ kind: notifyKind.LOADING }));
+    dispatch(notify.actions.update({ kind: NotifyEnum.LOADING }));
     // is json request: stringify body
     if (config.method !== methods.GET && bodyType === 'json') {
       options.body = JSON.stringify(options.body);
@@ -37,7 +37,6 @@ const doFetch = async (url: string, config?: any): Promise<any> => {
     options.headers = {
       ...defaultHeaders,
       ...options.headers,
-      'Authorization': 'Bearer ' + localStorage.getItem('token'),
     };
 
     // is json request: stringify body
@@ -54,7 +53,7 @@ const doFetch = async (url: string, config?: any): Promise<any> => {
     }
     else {
       response = await fetch(
-        `${import.meta.env.VITE_API_HOST}/${import.meta.env.VITE_API_VERSION}${url}`,
+        `${import.meta.env.VITE_API_HOST}/${url}`,
         options
       );
     }
@@ -79,9 +78,9 @@ const doFetch = async (url: string, config?: any): Promise<any> => {
 
     // return data
     return data;
-  } catch (exception) {
+  } catch (ex) {
     // handle error
-    handleError(exception, errorData, dispatch);
+    handleError(ex, errorData, dispatch);
 
   }
 };

@@ -12,7 +12,7 @@ import { selectIsLoading } from "features/notify/selectors";
 import user from "features/user";
 import { LoginLayout } from "layouts/LoginLayout"
 import { schema } from "./schema";
-import { $Form } from "./styles";
+import { $Form, $Link } from "./styles";
 
 /**
  * I am the login page
@@ -34,9 +34,10 @@ export const LoginPage = () => {
     const onSubmit = (data: any): void => {
         // dispatch action to login user
         dispatch(user.actions.update({
-            username: data.username,
+            email: data.email,
+            role: 'client',
             signed: true,
-          }));
+        }));
     };
 
     return (
@@ -44,8 +45,8 @@ export const LoginPage = () => {
             <h1>inTime</h1>
             <p>O lugar perfeito para você ganhar tempo</p>
             <$Form onSubmit={handleSubmit(onSubmit)}>
-                <Field error={errors.username?.message} label="Usuário">
-                    <Input name="username" innerRef={register} />
+                <Field error={errors.email?.message} label="Email">
+                    <Input name="email" innerRef={register} />
                 </Field>
 
                 <Field error={errors.password?.message} label="Senha">
@@ -54,6 +55,17 @@ export const LoginPage = () => {
                 <Button disabled={isLoading}>
                     {isLoading ? 'Entrando...' : 'Entrar'}
                 </Button>
+                <p>Não tem conta?
+                    <$Link to="cadastro">
+                        Cadastre-se
+                    </$Link>
+                </p>
+                <small>Quer oferecer seu serviço na plataforma? <br />
+                    <$Link to="cadastro-prestador">
+                        Cadastre-se como prestador
+                    </$Link>
+                </small>
+
             </$Form>
         </LoginLayout>
     )
