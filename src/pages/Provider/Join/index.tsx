@@ -48,7 +48,6 @@ export const ProviderJoin = () => {
             history.push("/");
         }
         catch (ex) {
-            console.log(ex);
             notify({
                 title: 'Não foi possível realizar o cadastro',
                 message: 'Tente novamente mais tarde',
