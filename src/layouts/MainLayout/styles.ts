@@ -23,10 +23,10 @@ export const $Content = styled(motion.div)`
 `
 export const $ContentContent = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: center;
     overflow: auto;
     overflow-x: hidden;
-    height: 100%;
     padding: 20px;
 `
 
