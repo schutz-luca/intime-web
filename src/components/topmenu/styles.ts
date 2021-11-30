@@ -28,6 +28,12 @@ export const $TopMenuContent = styled.div`
     padding: 0 200px;
 `
 
+export const $TopMenuOptions = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
 export const $Logo = styled.img`
     height: 70px;
 `

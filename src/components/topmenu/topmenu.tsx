@@ -1,15 +1,15 @@
 /**
  * IMPORTS
  */
+import { useState } from "react";
 import { MdLogout, MdOutlineMenu } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 import Logo from "assets/logo.svg";
 import useLogout from "hooks/useLogout";
 import { ThemeButton } from "templates/ThemeButton";
-import { useState } from "react";
 import { ITopMenuProps } from "./index.d";
-import { $Logo, $MenuButton, $MenuOption, $SearchField, $TopMenuContainer, $TopMenuContent } from "./styles";
 import { Option } from "./option";
-import { NavLink } from "react-router-dom";
+import { $Logo, $MenuButton, $MenuOption, $SearchField, $TopMenuContainer, $TopMenuContent, $TopMenuOptions } from "./styles";
 
 /**
  * I am the top menu
@@ -30,15 +30,19 @@ export const TopMenu = (props: ITopMenuProps) => {
 
                 <NavLink to="/"><$Logo src={Logo} alt="logo" /></NavLink>
 
-                {props.options.map(Option)}
+                <$TopMenuOptions >
+                    {props.options.map(Option)}
+                    <$MenuOption onClick={logout}>
+                        <MdLogout />
+                        <p>Sair</p>
+                    </$MenuOption>
+                </$TopMenuOptions>
 
                 {/* <$SearchField>
                     <Input name="search" placeholder="Pesquisar" icon={<FiSearch />} />
                 </$SearchField> */}
 
-                <$MenuButton onClick={logout}>
-                    <MdLogout />
-                </$MenuButton>
+
 
                 <ThemeButton absolute={false} />
 
