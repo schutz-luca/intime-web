@@ -8,14 +8,13 @@ import LoginImage from "assets/login-background.svg";
 import { Button } from "components/button";
 import { Field } from "components/form/field";
 import { Input } from "components/form/input";
-import { selectIsLoading } from "features/notify/selectors";
-import user from "features/user";
-import { LoginLayout } from "layouts/LoginLayout"
-import { $Form, $Link } from "pages/LoginPage/styles";
-import { schema } from "./schema";
-import http from 'infra/http';
 import { notify } from 'infra/notify';
+import http from 'infra/http';
+import { selectIsLoading } from "features/notify/selectors";
+import { LoginLayout } from "layouts/LoginLayout"
+import { $Form } from "pages/LoginPage/styles";
 import { useHistory } from 'react-router';
+import { schema } from "./schema";
 
 /**
  * I am the login page
@@ -36,10 +35,14 @@ export const ClientJoin = () => {
     const isLoading = useSelector(selectIsLoading);
 
     // handle form submit
-    const onSubmit = (data: any): void => {
+    const onSubmit = async (data: any): Promise<void> => {
         try {
             const body = { ...data, confirmPassword: undefined };
-            http.post('clients/', { body, dispatch });
+            const response = await http.post('clients/', { body, dispatch });
+
+            if (!response)
+                throw Error;
+
             notify({
                 title: 'Cadastro feito com sucesso!',
                 message: 'Faça login para continuar',
