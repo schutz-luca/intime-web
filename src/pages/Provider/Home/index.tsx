@@ -1,8 +1,6 @@
 /**
  * IMPORTS
  */
-import { useDispatch } from "react-redux";
-import interfaceState from 'features/interfaceState';
 import { Content } from "layouts/MainLayout/content";
 import { Title } from "components/title";
 
@@ -14,8 +12,8 @@ export const ProviderHome = () => {
     return (
         <Content fixed={
             <Title
-                title="Escolha um serviço"
-                subtitle="Você também pode filtrar por categorias"
+                title="Sua Agenda"
+                subtitle="Aqui você poderá checar seus compromissos"
             />
         }>
 
