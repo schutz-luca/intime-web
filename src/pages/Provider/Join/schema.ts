@@ -11,7 +11,7 @@ const schema = yup.object().shape({
   fullname: yup.string().required('Digite seu nome completo'),
   phone: yup.string().required('Digite seu celular'),
   cpf: yup.string().required('Digite seu CPF'),
-  birth_date: yup.string().required('Digite sua data de nascimento'),
+  birthDate: yup.string().required('Digite sua data de nascimento'),
   confirmPassword: yup.string().required('Digite a confirmação da senha')
     .oneOf([yup.ref('password'), null], 'Confirmação divergente'),
 });

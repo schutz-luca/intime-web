@@ -3,19 +3,18 @@
  */
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
+import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from "react-redux";
 import LoginImage from "assets/login-background.svg";
 import { Button } from "components/button";
 import { Field } from "components/form/field";
 import { Input } from "components/form/input";
 import { selectIsLoading } from "features/notify/selectors";
-import user from "features/user";
-import { LoginLayout } from "layouts/LoginLayout"
-import { $Form, $Link } from "pages/LoginPage/styles";
-import { schema } from "./schema";
 import http from 'infra/http';
 import { notify } from 'infra/notify';
-import { useHistory } from 'react-router';
+import { LoginLayout } from "layouts/LoginLayout"
+import { $Form } from "pages/LoginPage/styles";
+import { schema } from "./schema";
 
 /**
  * I am the login page
@@ -36,10 +35,14 @@ export const ProviderJoin = () => {
     const isLoading = useSelector(selectIsLoading);
 
     // handle form submit
-    const onSubmit = (data: any): void => {
+    const onSubmit = async (data: any): Promise<void> => {
         try {
             const body = { ...data, confirmPassword: undefined };
-            http.post('providers/', { body, dispatch });
+            const response = await http.post('providers/', { body, dispatch });
+
+            if (!response)
+                throw Error
+
             notify({
                 title: 'Cadastro feito com sucesso!',
                 message: 'Faça login para continuar',
@@ -76,8 +79,8 @@ export const ProviderJoin = () => {
                         maskChar={null}
                     />
                 </Field>
-                <Field error={errors.birth_date?.message} label="Data de Nascimento">
-                    <Input name="birth_date" innerRef={register} type="date" />
+                <Field error={errors.birthDate?.message} label="Data de Nascimento">
+                    <Input name="birthDate" innerRef={register} type="date" />
                 </Field>
                 <Field error={errors.email?.message} label="Email">
                     <Input name="email" innerRef={register} />
