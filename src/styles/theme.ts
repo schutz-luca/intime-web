@@ -118,6 +118,29 @@ const defaultTheme = {
   fonts
 };
 
+/**
+ * I am the animation variants.
+ */
+ const ease = [0.43, 0.13, 0.23, 0.96];
+
+ export const variants = {
+     initial: {
+         opacity: 0,
+         transition: { ease, duration: 0.3 },
+         y: '-20px'
+     },
+     animate: {
+         opacity: 1,
+         transition: { ease, duration: 0.5 },
+         y: 0
+     },
+     exit: {
+         opacity: 0,
+         transition: { ease, duration: 0.1 },
+         y: '-20px'
+     }
+ };
+
 export const darkTheme = {
   ...defaultTheme,
   ...darkNeutrals
