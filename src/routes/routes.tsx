@@ -13,6 +13,7 @@ import { ProviderHome } from "pages/Provider/Home";
 import { IRoutesProps } from "./routes.d";
 import { ClientJoin } from "pages/Client/Join";
 import { ProviderJoin } from "pages/Provider/Join";
+import { ListServices } from "pages/Provider/Services";
 
 const Routes = (props: IRoutesProps) => {
 
@@ -32,6 +33,7 @@ const Routes = (props: IRoutesProps) => {
                             {role === RoleEnum.PROVIDER &&
                                 <>
                                     <Route path="/" exact component={ProviderHome} />
+                                    <Route path="/services" exact component={ListServices} />
                                 </>
                             }
                             {role === RoleEnum.CLIENT &&
@@ -43,8 +45,8 @@ const Routes = (props: IRoutesProps) => {
                         :
                         <>
                             <Route path="/" exact component={LoginPage} />
-                            <Route path="/cadastro" exact component={ClientJoin} />
-                            <Route path="/cadastro-prestador" exact component={ProviderJoin} />
+                            <Route path="/join" exact component={ClientJoin} />
+                            <Route path="/join-provider" exact component={ProviderJoin} />
                         </>
                     }
                 </motion.div>
