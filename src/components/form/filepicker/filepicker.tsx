@@ -2,6 +2,7 @@
  * IMPORTS
  */
 import React from 'react';
+import { toBase64 } from 'utils/toBase64';
 import { IProps } from './filepicker.d';
 import { $Content, $FilePicker } from './styles';
 
@@ -9,40 +10,26 @@ import { $Content, $FilePicker } from './styles';
 /**
  * I am a file picker component.
  */
-const FilePicker = (props: IProps): React.ReactElement => {
-  // create file object
-  const create = (file) => {
-    // get properties
-    const { name, type } = file;
-
-    // create url
-    const url = window.URL.createObjectURL(file);
-
-    // call pick handler
-    props.onPick({ name, type, url }, file);
-  };
+const FilePicker = (props: IProps) => {
 
   // handle pick files
   const onPick = (event) => {
-    // get files
-    const { files } = event.target;
-
-    // add each file
-    [].map.call(files, create);
+    const [file] = event.target.files;
+    props.onPick(file)
   };
 
   return (
-    <$FilePicker className={props.className}>
+    <$FilePicker >
       <input
         onChange={onPick}
         multiple={!!props.multiple}
         name={props.name}
         ref={props.innerRef}
         type="file"
-        accept={`image/*${props.acceptVideo ? ',video/*' : ''}`}
+        accept={`image/*`}
       />
 
-      {props.icon && <props.icon />}
+      {props.icon && props.icon}
 
       {props.children && <$Content>{props.children}</$Content>}
     </$FilePicker>

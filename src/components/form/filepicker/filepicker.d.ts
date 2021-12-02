@@ -3,11 +3,9 @@
  */
 export interface IProps {
   children?: ReactNode
-  className?: string
-  icon?: IconType;
-  innerRef?: LegacyRef<HTMLInputElement>
+  icon?: JSX.Element;
+  innerRef?: any
   multiple?: boolean
   name: string
-  onPick: (info, file?) => unknown
-  acceptVideo?: boolean
+  onPick: (base64: any) => unknown
 }
