@@ -51,7 +51,7 @@ export const ClientHome = () => {
             />
         }>
             <$CardContainer variants={variants}>
-                {services.map(ServiceCard)}
+                {services.map(service => ServiceCard({ service }))}
             </$CardContainer>
         </Content>
     )
