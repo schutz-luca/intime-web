@@ -6,6 +6,7 @@ import { Modal } from "components/modal"
 import { $ModalForm } from "components/modal/styles";
 import { selectIsLoading } from "features/notify/selectors";
 import user from "features/user";
+import { selectUser } from "features/user/selectors";
 import http from "infra/http";
 import { notify } from "infra/notify";
 import { $Form, $Link } from "pages/LoginPage/styles";
@@ -29,6 +30,8 @@ export const ServiceModal = (props: IServiceModalProps) => {
 
     });
 
+    const { id } = useSelector(selectUser);
+
     const isLoading = useSelector(selectIsLoading);
 
     // handle form submit
@@ -38,7 +41,7 @@ export const ServiceModal = (props: IServiceModalProps) => {
 
             const body = {
                 ...data,
-                providerId: '66ee80e5-5119-4331-9949-0e244d49900c'
+                providerId: id
             }
 
             if (props.isNew)
