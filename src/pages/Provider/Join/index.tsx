@@ -14,7 +14,8 @@ import http from 'infra/http';
 import { notify } from 'infra/notify';
 import { LoginLayout } from "layouts/LoginLayout"
 import { $Form } from "pages/LoginPage/styles";
-import { schema } from "./schema";
+import { schema } from "../../../templates/ProviderForm/schema";
+import { ProviderForm } from 'templates/ProviderForm';
 
 /**
  * I am the login page
@@ -66,44 +67,7 @@ export const ProviderJoin = () => {
             <p>Preencha com as suas informações </p>
             <p>e comece a usar a plataforma!</p>
             <$Form onSubmit={handleSubmit(onSubmit)}>
-                <Field error={errors.fullname?.message} label="Nome Completo">
-                    <Input name="fullname" innerRef={register} />
-                </Field>
-                <Field error={errors.cpf?.message} label="CPF">
-                    <Input
-                        name="cpf"
-                        innerRef={register}
-                        control={control}
-                        mask="999.999.999-99"
-                        formatChars={{ 9: '[0-9]' }}
-                        maskChar={null}
-                    />
-                </Field>
-                <Field error={errors.birthDate?.message} label="Data de Nascimento">
-                    <Input name="birthDate" innerRef={register} type="date" />
-                </Field>
-                <Field error={errors.email?.message} label="Email">
-                    <Input name="email" innerRef={register} />
-                </Field>
-
-                <Field error={errors.phone?.message} label="Celular">
-                    <Input
-                        name="phone"
-                        innerRef={register}
-                        control={control}
-                        mask="(99) 99999-9999"
-                        formatChars={{ 9: '[0-9]' }}
-                        maskChar={null}
-                    />
-                </Field>
-
-                <Field error={errors.password?.message} label="Senha">
-                    <Input name="password" innerRef={register} type="password" />
-                </Field>
-
-                <Field error={errors.confirmPassword?.message} label="Confirmar Senha">
-                    <Input name="confirmPassword" innerRef={register} type="password" />
-                </Field>
+                <ProviderForm control={control} errors={errors} register={register} />
 
                 <Button disabled={isLoading}>
                     {isLoading ? 'Cadastrando...' : 'Cadastrar'}
