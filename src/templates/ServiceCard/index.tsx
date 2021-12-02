@@ -37,7 +37,7 @@ export const ServiceCard = (props: IServiceCardProps) => {
     }
 
     return (
-        <$Card>
+        <$Card key={props.service.id}>
             <h1>{props.service.name}</h1>
             <p>{props.service.description}</p>
             <small>{props.service.provider}</small>
