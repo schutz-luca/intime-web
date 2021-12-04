@@ -1,3 +1,5 @@
+import { string } from "yup/lib/locale";
+
 export interface IService {
     id: string
     name: string
@@ -5,15 +7,16 @@ export interface IService {
     description: string
     provider: string
     duration: number
+    image: string
 }
 
-export interface IAddress{
+export interface IAddress {
     street: string
     number: string
     district: string
     city: string
     state: string
-    components: string
+    complement: string
     zipCode: string
 }
 
@@ -35,4 +38,13 @@ export interface IClient {
     email: string
     phone: string
     address: IAddress
+}
+
+export interface IScheduling {
+    id: string
+    payment: string
+    client: string
+    service: string
+    start: string
+    end: string
 }
