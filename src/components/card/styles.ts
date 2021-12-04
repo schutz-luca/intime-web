@@ -14,6 +14,7 @@ export const $Card = styled.div`
     border-radius: 15px;
     margin: 10px;
     text-align: center;
+    width: 400px;
 
     h1,p,small{
         color: ${props=>props.theme.colors.white3};
