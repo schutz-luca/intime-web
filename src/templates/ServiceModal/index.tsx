@@ -1,34 +1,53 @@
+/**
+ * IMPORTS
+ */
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "components/button";
 import { Field } from "components/form/field";
 import { Input } from "components/form/input";
 import { Modal } from "components/modal"
 import { $ModalForm } from "components/modal/styles";
 import { selectIsLoading } from "features/notify/selectors";
-import user from "features/user";
 import { selectUser } from "features/user/selectors";
 import http from "infra/http";
 import { notify } from "infra/notify";
-import { $Form, $Link } from "pages/LoginPage/styles";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { IServiceModalProps } from "./index.d";
 import { schema } from "./schema"
+import { MdFileUpload } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { toBase64 } from "utils/toBase64";
+import { FilePicker } from "components/form/filepicker";
+import { Thumbnail } from "components/thumbnail";
+import { $ImageContainer } from "./styles";
 
+/**
+ * I am the service modal form
+ */
 export const ServiceModal = (props: IServiceModalProps) => {
     const { service } = props;
 
     // get dispatch
     const dispatch = useDispatch();
 
-    const history = useHistory();
-
     // use form
     const { errors, handleSubmit, register } = useForm({
         resolver: yupResolver(schema)
-
     });
+
+    const [image, setImage] = useState(null);
+
+    const onPick = async (file) => {
+        const base64 = await toBase64(file);
+        if (base64)
+            setImage(base64);
+    }
+
+    useEffect(() => {
+        if (!props.isOpen)
+            setImage(null);
+    }, [props.isOpen])
 
     const { id } = useSelector(selectUser);
 
@@ -41,6 +60,7 @@ export const ServiceModal = (props: IServiceModalProps) => {
 
             const body = {
                 ...data,
+                image,
                 providerId: id
             }
 
@@ -74,6 +94,21 @@ export const ServiceModal = (props: IServiceModalProps) => {
         <Modal isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
             <$ModalForm onSubmit={handleSubmit(onSubmit)}>
                 <h1>{props.isNew ? 'Cadastrar' : 'Editar'} Serviço</h1>
+
+                <$ImageContainer>
+                    <Thumbnail
+                        src={image || service?.image}
+                    />
+                    <FilePicker
+                        name="image"
+                        innerRef={register}
+                        onPick={onPick}
+                        icon={<MdFileUpload />}
+                    >
+                        Selecionar uma imagem para o serviço
+                    </FilePicker>
+                </$ImageContainer>
+
                 <Field error={errors.name?.message} label="Nome">
                     <Input
                         name="name"
