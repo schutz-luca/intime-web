@@ -8,10 +8,13 @@ import { Title } from "components/title";
 import { useEffect, useState } from "react";
 import http from "infra/http";
 import { notify } from "infra/notify";
-import { IService } from "constants/types";
+import { IScheduling, IService } from "constants/types";
 import { ServiceCard } from "templates/ServiceCard";
 import { $CardContainer } from "components/card/styles";
 import { variants } from "styles/theme";
+import { EmptyState } from "components/emptystate";
+import { FaRobot } from "react-icons/fa";
+import { SchedulingModal } from "templates/SchedulingModal";
 
 /**
  * I am the Home Page
@@ -22,6 +25,16 @@ export const ClientHome = () => {
     const dispatch = useDispatch();
 
     const [services, setServices] = useState<IService[]>([]);
+    const [selectedService, setSelectedService] = useState<IService | null>(null);
+
+    // modal states
+    const [isOpen, setIsOpen] = useState(false);
+    const handleModal = (isOpen: boolean) => { setIsOpen(isOpen); }
+
+    const openCreateModal = (service: IService) => {
+        setIsOpen(true);
+        setSelectedService(service);
+    }
 
     useEffect(() => {
         (async () => {
@@ -35,13 +48,14 @@ export const ClientHome = () => {
             }
             catch (ex) {
                 notify({
-                    title: 'Não foi possível realizar o cadastro',
+                    title: 'Não foi possível listar os serviços disponíveis',
                     message: 'Tente novamente mais tarde',
                     type: 'danger'
                 })
             }
         })()
     }, [])
+
 
     return (
         <Content fixed={
@@ -50,8 +64,20 @@ export const ClientHome = () => {
                 subtitle="Você também pode filtrar por categorias"
             />
         }>
+            <SchedulingModal
+                isOpen={isOpen}
+                setIsOpen={handleModal}
+                service={selectedService}
+            />
             <$CardContainer variants={variants}>
-                {services.map(service => ServiceCard({ service }))}
+                {services.length > 0 ?
+                    services.map(service => ServiceCard({ selectCard: openCreateModal, service }))
+                    :
+                    <EmptyState
+                        description="Não há nenhum serviço disponível"
+                        icon={FaRobot}
+                    />
+                }
             </$CardContainer>
         </Content>
     )

@@ -12,7 +12,12 @@ import { selectIsLoading } from "features/notify/selectors";
 import user from "features/user";
 import { LoginLayout } from "layouts/LoginLayout"
 import { schema } from "./schema";
-import { $Form, $Link } from "./styles";
+import { $CheckContainer, $Form, $Link } from "./styles";
+import http from 'infra/http';
+import { useHistory } from 'react-router';
+import { notify } from 'infra/notify';
+import { Checkbox } from 'components/form/checkbox';
+import { useState } from 'react';
 
 /**
  * I am the login page
@@ -21,6 +26,8 @@ export const LoginPage = () => {
 
     // get dispatch
     const dispatch = useDispatch();
+
+    const history = useHistory();
 
     // use form
     const { errors, handleSubmit, register } = useForm({
@@ -31,13 +38,36 @@ export const LoginPage = () => {
     const isLoading = useSelector(selectIsLoading);
 
     // handle form submit
-    const onSubmit = (data: any): void => {
-        // dispatch action to login user
-        dispatch(user.actions.update({
-            email: data.email,
-            role: 'client',
-            signed: true,
-        }));
+    const onSubmit = async (data: any): Promise<void> => {
+        try {
+            console.log(data.isProvider);
+            const entity = data.isProvider ? 'provider' : 'client'
+            const response = await http.post(`login-${entity}/`, { body: { email: data.email, password: data.password }, dispatch });
+
+            if (!response)
+                throw Error;
+
+            const { email } = response;
+
+            const [currentUser] = await http.get(`${entity}s?email=${email}`, { dispatch });
+
+            dispatch(user.actions.update({
+                id: currentUser.id,
+                email: data.email,
+                name: currentUser.fullname,
+                role: entity,
+                signed: true,
+            }));
+            history.push("/");
+        }
+        catch (ex) {
+            console.log(ex);
+            notify({
+                title: 'Não foi possível realizar o cadastro',
+                message: 'Tente novamente mais tarde',
+                type: 'danger'
+            })
+        }
     };
 
     return (
@@ -52,16 +82,22 @@ export const LoginPage = () => {
                 <Field error={errors.password?.message} label="Senha">
                     <Input name="password" innerRef={register} type="password" />
                 </Field>
+
+                <$CheckContainer >
+                    <p>Deseja entrar como prestador?</p>
+                    <Checkbox name="isProvider" innerRef={register} />
+                </$CheckContainer>
+
                 <Button disabled={isLoading}>
                     {isLoading ? 'Entrando...' : 'Entrar'}
                 </Button>
                 <p>Não tem conta?
-                    <$Link to="cadastro">
+                    <$Link to="join">
                         Cadastre-se
                     </$Link>
                 </p>
                 <small>Quer oferecer seu serviço na plataforma? <br />
-                    <$Link to="cadastro-prestador">
+                    <$Link to="join-provider">
                         Cadastre-se como prestador
                     </$Link>
                 </small>

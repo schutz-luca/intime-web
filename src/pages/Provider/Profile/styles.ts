@@ -27,3 +27,11 @@ export const $AvatarContainer = styled.div`
         margin: 10px 0;
     }
 `
+
+export const $Divisor = styled.h2`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 10px 0 30px 0;
+`

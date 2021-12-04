@@ -16,6 +16,7 @@ import { ProviderJoin } from "pages/Provider/Join";
 import { ListServices } from "pages/Provider/Services";
 import { ProviderProfile } from "pages/Provider/Profile";
 import { ClientProfile } from "pages/Client/Profile";
+import { ClientSchedulings } from "pages/Client/Schedulings";
 
 const Routes = (props: IRoutesProps) => {
 
@@ -34,7 +35,7 @@ const Routes = (props: IRoutesProps) => {
                         <MainLayout>
                             {role === RoleEnum.PROVIDER &&
                                 <>
-                                    <Route path="/" exact component={ProviderHome} />
+                                    <Route path="/" exact component={ClientSchedulings} />
                                     <Route path="/profile" exact component={ProviderProfile} />
                                     <Route path="/services" exact component={ListServices} />
                                 </>
@@ -43,6 +44,7 @@ const Routes = (props: IRoutesProps) => {
                                 <>
                                     <Route path="/" exact component={ClientHome} />
                                     <Route path="/profile" exact component={ClientProfile} />
+                                    <Route path="/schedulings" exact component={ClientSchedulings} />
                                 </>
                             }
                         </MainLayout>

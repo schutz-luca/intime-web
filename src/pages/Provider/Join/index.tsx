@@ -38,7 +38,7 @@ export const ProviderJoin = () => {
     // handle form submit
     const onSubmit = async (data: any): Promise<void> => {
         try {
-            const body = { ...data, confirmPassword: undefined };
+            const body = { ...data, confirmPassword: undefined, address: null };
             const response = await http.post('providers/', { body, dispatch });
 
             if (!response)

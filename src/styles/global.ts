@@ -70,17 +70,17 @@ export default createGlobalStyle`
 
     *::-webkit-scrollbar-track {
       border-radius: 40px;
-      background: #0001;
+      background-color: ${props => props.theme.neutral3}70;
     }
 
     *::-webkit-scrollbar-thumb {
       border-radius: 40px;
-      background-color: ${props => props.theme.neutral9}30;
+      background-color: ${props => props.theme.neutral6}60;
       transition: background-color 0.2s ease-out;
     }
 
     *:hover::-webkit-scrollbar-thumb {
-      background-color: #2228;
+      background-color: ${props => props.theme.neutral6}60;
     }
 
     // hover configs

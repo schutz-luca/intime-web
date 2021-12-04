@@ -1,4 +1,5 @@
 
+import { $Checkbox } from "components/form/checkbox/styles";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { devices } from "styles/devices";
@@ -22,6 +23,27 @@ export const $Form = styled.form`
      color: ${props=>props.theme.neutral8}
  }
 `;
+
+export const $CheckContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+
+    p{  
+        font-size: 15px;
+        margin: 0;
+    }
+
+    ${$Checkbox}{
+        margin-left: 10px;
+        svg{
+            height: 30px;
+            width: 30px;
+        }
+    }
+`
 
 export const $Link = styled(NavLink)`
     color: ${props=>props.theme.colors.primary};

@@ -22,16 +22,13 @@ export const $Content = styled(motion.div)`
     }
 `
 export const $ContentContent = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     overflow: auto;
     overflow-x: hidden;
-    padding: 20px;
+    padding: 10px 20px;
 `
 
 export const $ContentFixed = styled.div`
-    padding: 20px;
+    padding: 10px;
 `
 
 const ease = [0.43, 0.13, 0.23, 0.96];

@@ -10,12 +10,13 @@ import { editSchema } from "templates/ProviderForm/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { ProviderForm } from "templates/ProviderForm";
-import { $AvatarContainer, $ProfileContainer, $Form } from "./styles";
+import { $AvatarContainer, $ProfileContainer, $Form, $Divisor } from "./styles";
 import { Button } from "components/button";
 import { MdCameraAlt, MdCheck } from "react-icons/md";
 import { Avatar } from "components/avatar";
 import { FilePicker } from "components/form/filepicker";
 import { toBase64 } from "utils/toBase64";
+import { AddressForm } from "templates/AddressForm";
 
 export const ProviderProfile = () => {
 
@@ -65,7 +66,8 @@ export const ProviderProfile = () => {
 
             const body = {
                 ...data,
-                avatar
+                avatar,
+                address: null
             }
 
             response = await http.patch(`providers/${id}/`, { body, dispatch });
@@ -118,6 +120,14 @@ export const ProviderProfile = () => {
                             isEditing={true}
                         />
                     }
+                    <$Divisor>
+                        Endereço
+                    </$Divisor>
+                    <AddressForm
+                        control={control}
+                        errors={errors}
+                        register={register}
+                    />
                     <Button>
                         Salvar
                     </Button>
