@@ -3,6 +3,7 @@
  */
 import styled from "styled-components";
 import { Button } from "components/button";
+import { devices } from "styles/devices";
 
 export const $ThemeButton = styled(Button)`
     border-radius: 50%;
@@ -19,5 +20,9 @@ export const $ThemeButton = styled(Button)`
     svg{
         height: 100%;
         width: 100%;
+    }
+
+    @media ${devices.tablet}{
+        display: none;
     }
 `

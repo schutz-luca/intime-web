@@ -4,6 +4,7 @@
 import { Button } from "components/button";
 import { Input } from "components/form/input";
 import styled from "styled-components";
+import { devices } from "styles/devices";
 
 export const $TopMenuContainer = styled.header`
     position: sticky;
@@ -12,7 +13,6 @@ export const $TopMenuContainer = styled.header`
     width: 100vw;
     height: 80px;
     background-color: ${props => props.theme.neutral2}90;
-    box-shadow: inset 0 -0.2px 0 ${props => props.theme.neutral6};
     top: 0;
     z-index: 3;
     padding: 0;
@@ -26,12 +26,26 @@ export const $TopMenuContent = styled.div`
     width: 100%;
     margin: auto;
     padding: 0 200px;
+
+    .logoLink {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media ${devices.tablet}{
+        padding: 0 20px;
+    }
 `
 
 export const $TopMenuOptions = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media ${devices.tablet}{
+        display: none;
+    }
 `
 
 export const $Logo = styled.img`
@@ -64,13 +78,27 @@ export const $MenuOption = styled($MenuButton)`
     padding: 0 8px;
     height: auto;
     width: auto;
+
+    &.mobileOption {
+        display: none;
+        
+        @media ${devices.tablet} {
+            display: flex;
+        }
+    }
+    
     svg{
         padding: 8px 0;
         width: 40px;
         height: 40px;
     }
     p{
-        font-size: 11;
+        font-size: 14px;
+        text-transform: none;
+    }
+
+    p, svg{
+        color: ${props => props.theme.neutral7};
     }
 `
 
