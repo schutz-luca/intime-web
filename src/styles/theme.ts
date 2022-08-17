@@ -4,13 +4,13 @@ import { darken, invert } from "polished";
  * I am the palletes neutral colors
  */
 const neutrals = {
-  black: '#110f0f',
-  black2: '#0f0f0f',
-  black3: '#191818',
+  black: '#0f0f0f',
+  black2: '#161616',
+  black3: '#191919',
   black4: '#262728',
   gray: '#494949',
   gray2: '#727272',
-  gray3: '#c4c4cc',
+  gray3: '#b8b8ba',
   white: '#e2e2e2',
   white2: '#fcfcfc',
   white3: '#ffffff',
@@ -20,8 +20,8 @@ const neutrals = {
  * I am a color palette.
  */
 const colors = {
-  primary: '#577399',
-  primaryDark: darken(0.1, '#577399'),
+  primary: '#3c6dad',
+  primaryDark: darken(0.1, '#3c6dad'),
   secondary: '#F97171',
   secondaryDark: darken('#F97171'),
   red: "#e25656",
@@ -56,7 +56,7 @@ const lightNeutrals = {
   neutral7: invert(neutrals.gray3),
   neutral8: invert(neutrals.white),
   neutral9: invert(neutrals.white2),
-  neutral10: invert(neutrals.white),
+  neutral10: invert(neutrals.white3),
   background: neutrals.white2
 }
 

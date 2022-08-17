@@ -21,6 +21,6 @@ export const $Subtitle = styled.div`
     color: ${props => props.theme.neutral9}dd;
     font-size: 16px;
     @media ${devices.desktop}{
-        font-size: 12px;
+        font-size: 14px;
     }
 `

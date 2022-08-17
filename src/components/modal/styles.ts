@@ -23,12 +23,10 @@ export const $ModalBackground = styled.div`
 
 export const $ModalForm = styled.form`
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    width: 400px;
     gap: 10px;
     text-align: center;
+    overflow: auto;
 
     &>*{
         width: 100%;
@@ -47,6 +45,9 @@ export const $Modal = styled.div`
     background: ${props=>props.theme.background};
     border-radius: 15px;
     z-index: 11;
+    
+    height: 80%;
+    overflow: auto;
 `
 
 export const $CloseContainer = styled.div`

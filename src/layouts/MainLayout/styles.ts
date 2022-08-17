@@ -28,7 +28,7 @@ export const $ContentContent = styled.div`
 `
 
 export const $ContentFixed = styled.div`
-    padding: 10px;
+    padding: 30px 10px;
 `
 
 const ease = [0.43, 0.13, 0.23, 0.96];

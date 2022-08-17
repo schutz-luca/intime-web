@@ -42,19 +42,19 @@ export const LoginPage = () => {
         try {
             console.log(data.isProvider);
             const entity = data.isProvider ? 'provider' : 'client'
-            const response = await http.post(`login-${entity}/`, { body: { email: data.email, password: data.password }, dispatch });
+            // const response = await http.post(`login-${entity}/`, { body: { email: data.email, password: data.password }, dispatch });
 
-            if (!response)
-                throw Error;
+            // if (!response)
+            //     throw Error;
 
-            const { email } = response;
+            // const { email } = response;
 
-            const [currentUser] = await http.get(`${entity}s?email=${email}`, { dispatch });
+            // const [currentUser] = await http.get(`${entity}s?email=${email}`, { dispatch });
 
             dispatch(user.actions.update({
-                id: currentUser.id,
+                id: '1',
                 email: data.email,
-                name: currentUser.fullname,
+                name: 'user',
                 role: entity,
                 signed: true,
             }));
