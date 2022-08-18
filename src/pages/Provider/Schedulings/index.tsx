@@ -30,7 +30,7 @@ export const ProviderSchedulings = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response: IScheduling[] = await http.get('schedulings/', { dispatch });
+                const response: IScheduling[] = await http.get('scheduling', { dispatch });
 
                 if (!response)
                     throw Error;

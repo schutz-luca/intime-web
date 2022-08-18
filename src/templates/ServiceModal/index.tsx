@@ -36,17 +36,17 @@ export const ServiceModal = (props: IServiceModalProps) => {
         resolver: yupResolver(schema)
     });
 
-    const [image, setImage] = useState(null);
+    const [cover, setCover] = useState(null);
 
     const onPick = async (file) => {
         const base64 = await toBase64(file);
         if (base64)
-            setImage(base64);
+            setCover(base64);
     }
 
     useEffect(() => {
         if (!props.isOpen)
-            setImage(null);
+            setCover(null);
     }, [props.isOpen])
 
     const { id } = useSelector(selectUser);
@@ -60,14 +60,14 @@ export const ServiceModal = (props: IServiceModalProps) => {
 
             const body = {
                 ...data,
-                image,
-                providerId: id
+                cover,
+                providerId: '3ae595a3-25b9-44f6-af3a-762f6c95f738'
             }
 
             if (props.isNew)
-                response = await http.post('services/', { body, dispatch });
+                response = await http.post('product', { body, dispatch });
             else
-                response = await http.patch(`services/${props.service?.id}/`, { body, dispatch });
+                response = await http.patch(`product/${props.service?.id}/`, { body, dispatch });
 
             if (!response)
                 throw Error;
@@ -97,10 +97,10 @@ export const ServiceModal = (props: IServiceModalProps) => {
 
                 <$ImageContainer>
                     <Thumbnail
-                        src={image || service?.image}
+                        src={cover || service?.cover}
                     />
                     <FilePicker
-                        name="image"
+                        name="cover"
                         innerRef={register}
                         onPick={onPick}
                         icon={<MdFileUpload />}

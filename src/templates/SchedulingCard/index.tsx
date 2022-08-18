@@ -26,7 +26,7 @@ export const SchedulingCard = (props: ISchedulingCardProps) => {
             if (!confirm('Você deseja mesmo cancelar esse agendamento?'))
                 return
 
-            await http.delete(`schedulings/${props?.scheduling?.id}`, { dispatch });
+            await http.delete(`scheduling/${props?.scheduling?.id}`, { dispatch });
 
             notify({
                 title: 'Sucesso!',

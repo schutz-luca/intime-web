@@ -57,7 +57,7 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
                 end: endDate
             }
 
-            response = await http.post(`schedulings/`, { body, dispatch });
+            response = await http.post(`scheduling`, { body, dispatch });
 
             if (!response)
                 throw Error;

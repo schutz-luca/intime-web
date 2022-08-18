@@ -6,12 +6,16 @@ import { Button } from "components/button";
 import { devices } from "styles/devices";
 
 export const $CardTitle = styled.div`
-        border-bottom: 1px solid ${props => props.theme.colors.white3};
-        margin-bottom: 10px;
-        padding: 10px 0;
+    border-bottom: 1px solid ${props => props.theme.colors.white3};
+    margin-bottom: 10px;
+    padding: 10px 0;
+
+    h2, h3{
+        color: ${props => props.theme.colors.white3};
+    }
+
     h2{
         font-size: 40px;
-        color: ${props => props.theme.colors.white3};
     }
 `
 

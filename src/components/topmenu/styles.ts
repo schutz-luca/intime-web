@@ -33,6 +33,10 @@ export const $TopMenuContent = styled.div`
         align-items: center;
     }
 
+    @media (max-width: 965px){
+        padding: 0 100px;
+    }
+
     @media ${devices.tablet}{
         padding: 0 20px;
     }

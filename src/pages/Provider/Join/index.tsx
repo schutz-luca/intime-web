@@ -39,7 +39,7 @@ export const ProviderJoin = () => {
     const onSubmit = async (data: any): Promise<void> => {
         try {
             const body = { ...data, confirmPassword: undefined, address: null };
-            const response = await http.post('providers/', { body, dispatch });
+            const response = await http.post('provider/signup', { body, dispatch });
 
             if (!response)
                 throw Error

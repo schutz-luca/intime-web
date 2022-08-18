@@ -47,7 +47,7 @@ export const ServiceCard = (props: IServiceCardProps) => {
             if (!confirm('Você deseja mesmo excluir esse serviço?'))
                 return
 
-            await http.delete(`services/${props?.service?.id}`, { dispatch });
+            await http.delete(`service/${props?.service?.id}`, { dispatch });
 
             notify({
                 title: 'Serviço excluído com sucesso:',
@@ -67,7 +67,7 @@ export const ServiceCard = (props: IServiceCardProps) => {
 
     return (
         <Card key={props.service.id}>
-            <Thumbnail src={props.service.image} />
+            <Thumbnail src={props.service.cover} />
 
             <$CardTitle>
                 <h2>{props.service.name}</h2>

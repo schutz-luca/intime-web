@@ -7,7 +7,7 @@ export interface IService {
     description: string
     provider: string
     duration: number
-    image: string
+    cover: string
 }
 
 export interface IAddress {
@@ -44,7 +44,7 @@ export interface IScheduling {
     id: string
     payment: string
     client: string
-    service: string
+    service: IService
     start: string
     end: string
 }

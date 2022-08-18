@@ -38,7 +38,7 @@ export const ProviderProfile = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response: IProvider = await http.get(`providers/${id}/`, { dispatch });
+                const response: IProvider = await http.get(`provider/${id}/`, { dispatch });
 
                 if (!response)
                     throw Error;
@@ -70,7 +70,7 @@ export const ProviderProfile = () => {
                 address: null
             }
 
-            response = await http.patch(`providers/${id}/`, { body, dispatch });
+            response = await http.patch(`provider/${id}/`, { body, dispatch });
 
             if (!response)
                 throw Error;

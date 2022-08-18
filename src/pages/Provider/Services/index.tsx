@@ -48,7 +48,7 @@ export const ListServices = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response: IService[] = await http.get('services/', { dispatch });
+                const response: IService[] = await http.get('product', { dispatch });
 
                 if (!response)
                     throw Error;

@@ -37,7 +37,7 @@ export const ClientProfile = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response: IClient = await http.get(`clients/${id}/`, { dispatch });
+                const response: IClient = await http.get(`client${id}/`, { dispatch });
 
                 if (!response)
                     throw Error;
@@ -68,7 +68,7 @@ export const ClientProfile = () => {
                 avatar
             }
 
-            response = await http.patch(`clients/${id}/`, { body, dispatch });
+            response = await http.patch(`client/${id}/`, { body, dispatch });
 
             if (!response)
                 throw Error;

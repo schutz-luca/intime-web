@@ -38,7 +38,7 @@ export const ClientJoin = () => {
     const onSubmit = async (data: any): Promise<void> => {
         try {
             const body = { ...data, confirmPassword: undefined, address: null };
-            const response = await http.post('clients/', { body, dispatch });
+            const response = await http.post('client/signup', { body, dispatch });
 
             if (!response)
                 throw Error;
