@@ -12,7 +12,7 @@ export const $TopMenuContainer = styled.header`
     flex-direction: column;
     width: 100vw;
     height: 80px;
-    background-color: ${props => props.theme.neutral2}90;
+    background-color: ${props => props.theme.neutral2}70;
     top: 0;
     z-index: 3;
     padding: 0;

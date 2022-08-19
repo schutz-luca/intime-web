@@ -4,13 +4,13 @@ import { darken, invert } from "polished";
  * I am the palletes neutral colors
  */
 const neutrals = {
-  black: '#0f0f0f',
+  black: '#141414',
   black2: '#161616',
   black3: '#191919',
   black4: '#262728',
   gray: '#494949',
   gray2: '#727272',
-  gray3: '#b8b8ba',
+  gray3: '#adadad',
   white: '#e2e2e2',
   white2: '#fcfcfc',
   white3: '#ffffff',

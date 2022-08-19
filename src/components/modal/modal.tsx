@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { MdClose } from "react-icons/md";
 import { variants } from "styles/theme";
 import { IModalProps } from "./index.d";
-import { $CloseContainer, $Modal, $ModalBackground, $ModalContainer } from "./styles";
+import { $CloseContainer, $Modal, $ModalBackground, $ModalContainer, $ModalChildren } from "./styles";
 
 export const Modal = (props: IModalProps) => {
 
@@ -30,9 +30,11 @@ export const Modal = (props: IModalProps) => {
                                     <MdClose />
                                 </Button>
                             </$CloseContainer>
-                            {props.children}
+                            <$ModalChildren>
+                                {props.children}
+                            </$ModalChildren>
                         </$Modal>
-                        <$ModalBackground onClick={closeModal}/>
+                        <$ModalBackground onClick={closeModal} />
                     </$ModalContainer>
                 }
 
