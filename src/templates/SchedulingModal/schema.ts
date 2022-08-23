@@ -9,7 +9,7 @@ import * as yup from 'yup';
  */
 const schema = yup.object().shape({
   payment: yup.string().required('Selecione uma forma de pagamento'),
-  start: yup.string().required('Selecione o horário do agendamento'),
+  startDate: yup.string().required('Selecione o horário do agendamento'),
 });
 
 

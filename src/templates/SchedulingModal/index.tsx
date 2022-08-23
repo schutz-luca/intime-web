@@ -34,11 +34,11 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
         resolver: yupResolver(schema)
     });
 
-    const watchStartDate = watch("start", null);
+    const watchStartDate = watch("startDate", null);
     const [endDate, setEndState] = useState(null);
 
     useEffect(() => {
-        setEndState(addMinutes(watchStartDate,service?.duration));
+        setEndState(addMinutes(watchStartDate, service?.duration));
     }, [watchStartDate])
 
     const { id } = useSelector(selectUser);
@@ -52,9 +52,9 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
 
             const body = {
                 ...data,
-                clientId: id,
-                service: service.id,
-                end: endDate
+                endDate,
+                client: { id },
+                product: { id: service.id },
             }
 
             response = await http.post(`scheduling`, { body, dispatch });
@@ -92,17 +92,17 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
                     />
                 </Field>
 
-                <Field error={errors.start?.message} label="Horário">
+                <Field error={errors.startDate?.message} label="Horário">
                     <Input
-                        name="start"
+                        name="startDate"
                         innerRef={register}
                         type="datetime-local"
                     />
                 </Field>
 
-                <Field error={errors.end?.price} label="Término">
+                <Field error={errors.endDate?.message} label="Término">
                     <Input
-                        name="end"
+                        name="endDate"
                         innerRef={register}
                         type="datetime-local"
                         value={endDate}

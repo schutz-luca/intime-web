@@ -26,7 +26,7 @@ export const ClientProfile = () => {
 
     const [client, setClient] = useState<IClient>(null);
 
-    const [avatar, setAvatar] = useState(null);
+    const [photo, setPhoto] = useState(null);
 
     // use form
     const { control, errors, handleSubmit, register } = useForm({
@@ -37,7 +37,7 @@ export const ClientProfile = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response: IClient = await http.get(`client${id}/`, { dispatch });
+                const response: IClient = await http.get(`client/${id}/`, { dispatch });
 
                 if (!response)
                     throw Error;
@@ -56,7 +56,7 @@ export const ClientProfile = () => {
 
     const onPick = async (file) => {
         const base64 = await toBase64(file);
-        setAvatar(base64);
+        setPhoto(base64);
     }
 
     const onSubmit = async (data: any): Promise<void> => {
@@ -65,10 +65,10 @@ export const ClientProfile = () => {
 
             const body = {
                 ...data,
-                avatar
+                avatar: photo
             }
 
-            response = await http.patch(`client/${id}/`, { body, dispatch });
+            response = await http.put(`client/${id}/`, { body, dispatch });
 
             if (!response)
                 throw Error;
@@ -99,7 +99,7 @@ export const ClientProfile = () => {
 
                 <$Form onSubmit={handleSubmit(onSubmit)}>
                     <$AvatarContainer>
-                        <Avatar src={avatar || client?.avatar} size="200px" />
+                        <Avatar src={photo || client?.photo} size="200px" />
                         <FilePicker
                             name="avatar"
                             innerRef={register}

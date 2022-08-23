@@ -27,7 +27,7 @@ export const ProviderProfile = () => {
 
     const [provider, setProvider] = useState<IProvider>(null);
 
-    const [avatar, setAvatar] = useState(null);
+    const [photo, setPhoto] = useState(null);
 
     // use form
     const { control, errors, handleSubmit, register } = useForm({
@@ -57,7 +57,7 @@ export const ProviderProfile = () => {
 
     const onPick = async (file) => {
         const base64 = await toBase64(file);
-        setAvatar(base64);
+        setPhoto(base64);
     }
 
     const onSubmit = async (data: any): Promise<void> => {
@@ -66,11 +66,11 @@ export const ProviderProfile = () => {
 
             const body = {
                 ...data,
-                avatar,
+                avatar: photo,
                 address: null
             }
 
-            response = await http.patch(`provider/${id}/`, { body, dispatch });
+            response = await http.put(`provider/${id}/`, { body, dispatch });
 
             if (!response)
                 throw Error;
@@ -101,7 +101,7 @@ export const ProviderProfile = () => {
 
                 <$Form onSubmit={handleSubmit(onSubmit)}>
                     <$AvatarContainer>
-                        <Avatar src={avatar || provider?.avatar} size="200px" />
+                        <Avatar src={photo || provider?.photo} size="200px" />
                         <FilePicker
                             name="avatar"
                             innerRef={register}

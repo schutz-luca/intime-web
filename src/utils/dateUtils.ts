@@ -10,7 +10,8 @@ import { ptBR } from "date-fns/locale";
  * @returns formatted date
  */
 export const getHoursString = (date: string) => {
-    return format(new Date(date), 'HH\':\'MM', { locale: ptBR })
+    if (date)
+        return format(new Date(date), 'HH\':\'MM', { locale: ptBR })
 }
 
 
@@ -20,7 +21,8 @@ export const getHoursString = (date: string) => {
  * @returns formatted date
  */
 export const formatStringDate = (date: string) => {
-    return format(new Date(date), 'dd\'/\'MM\'/\'yyyy', { locale: ptBR })
+    if (date)
+        return format(new Date(date), 'dd\'/\'MM\'/\'yyyy', { locale: ptBR })
 }
 
 /**
@@ -29,7 +31,8 @@ export const formatStringDate = (date: string) => {
  * @returns formatted date string
  */
 export const dateToString = (date: Date) => {
-    return format(date, 'yyyy\'-\'MM\'-\'dd\'T\'HH\':\'mm', { locale: ptBR })
+    if (date)
+        return format(date, 'yyyy\'-\'MM\'-\'dd\'T\'HH\':\'mm', { locale: ptBR })
 }
 
 /**

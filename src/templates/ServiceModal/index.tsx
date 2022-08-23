@@ -67,7 +67,7 @@ export const ServiceModal = (props: IServiceModalProps) => {
             if (props.isNew)
                 response = await http.post('product', { body, dispatch });
             else
-                response = await http.patch(`product/${props.service?.id}/`, { body, dispatch });
+                response = await http.put(`product/${props.service?.id}/`, { body, dispatch });
 
             if (!response)
                 throw Error;

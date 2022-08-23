@@ -46,19 +46,19 @@ export const SchedulingCard = (props: ISchedulingCardProps) => {
 
     return (
         <Card key={props.scheduling.id}>
-            <Thumbnail src={props.scheduling.service.image} />
+            <Thumbnail src={props.scheduling.product.cover} />
             <$CardTitle>
-                <h2>{props.scheduling.service.name}</h2>
-                <p>{props.scheduling.service.description}</p>
+                <h2>{props.scheduling.product.name}</h2>
+                <p>{props.scheduling.product.description}</p>
             </$CardTitle>
             <p>{nameToValue(paymentTypes, props.scheduling.payment)}</p>
             <$Time>
                 <div>
-                    <h1>{getHoursString(props.scheduling.start)}</h1>
+                    <h1>{getHoursString(props.scheduling.startDate)}</h1>
                     <p>Até</p>
-                    <h1>{getHoursString(props.scheduling.end)}</h1>
+                    <h1>{getHoursString(props.scheduling.endDate)}</h1>
                 </div>
-                <p>{formatStringDate(props.scheduling.start)}</p>
+                <p>{formatStringDate(props.scheduling.startDate)}</p>
             </$Time>
 
 
