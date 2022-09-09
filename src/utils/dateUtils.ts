@@ -14,6 +14,13 @@ export const getHoursString = (date: string) => {
         return format(new Date(date), 'HH\':\'MM', { locale: ptBR })
 }
 
+/**
+ * I format a date to string in date type input format
+ */
+export const formatInputDate = (date): string => (
+    date && format(new Date(date), 'yyyy-MM-dd')
+);
+
 
 /**
  * 

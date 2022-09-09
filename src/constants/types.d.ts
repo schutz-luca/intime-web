@@ -23,7 +23,7 @@ export interface IProvider {
     id: string
     photo: string
     fullname: string
-    doc: string
+    cpf: string
     isCompany: boolean
     email: string
     birthDate: string
