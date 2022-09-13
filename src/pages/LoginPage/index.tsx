@@ -2,6 +2,7 @@
  * IMPORTS
  */
 import { yupResolver } from '@hookform/resolvers/yup';
+import jwt_decode from "jwt-decode";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import LoginImage from "assets/login-background.svg";
@@ -16,8 +17,6 @@ import { $CheckContainer, $Form, $Link } from "./styles";
 import http from 'infra/http';
 import { useHistory } from 'react-router';
 import { notify } from 'infra/notify';
-import { Checkbox } from 'components/form/checkbox';
-import { useState } from 'react';
 
 /**
  * I am the login page
@@ -40,29 +39,28 @@ export const LoginPage = () => {
     // handle form submit
     const onSubmit = async (data: any): Promise<void> => {
         try {
-            const entity = data.isProvider ? 'provider' : 'client'
-            const response = await http.get(`${entity}`, { dispatch });
+            const response = await http.post('login', { body: data, dispatch });
 
             if (!response)
                 throw Error;
 
-            
+            const currentUser: any = jwt_decode(response.token);
 
-            const currentUser = response[0];
-
+            localStorage.setItem('token', response.token);
             dispatch(user.actions.update({
                 id: currentUser.id,
                 email: currentUser.email,
-                name: currentUser.fullname,
-                role: entity,
+                name: currentUser.fullName,
+                role: currentUser.role,
                 signed: true,
             }));
             history.push("/");
         }
         catch (ex) {
+            console.log(ex)
             notify({
-                title: 'Não foi possível realizar o cadastro',
-                message: 'Tente novamente mais tarde',
+                title: 'Não foi possível realizar o login',
+                message: 'Verifique seu email e sua senha e tente novamente',
                 type: 'danger'
             })
         }
@@ -80,11 +78,6 @@ export const LoginPage = () => {
                 <Field error={errors.password?.message} label="Senha">
                     <Input name="password" innerRef={register} type="password" />
                 </Field>
-
-                <$CheckContainer >
-                    <p>Deseja entrar como prestador?</p>
-                    <Checkbox name="isProvider" innerRef={register} />
-                </$CheckContainer>
 
                 <Button disabled={isLoading}>
                     {isLoading ? 'Entrando...' : 'Entrar'}

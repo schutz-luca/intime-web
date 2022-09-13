@@ -3,6 +3,8 @@
  */
 import notify from 'features/notify';
 import { NotifyEnum } from 'features/notify/index.d';
+import user from 'features/user';
+import initialState from 'features/user/initialState';
 
 
 /**
@@ -25,6 +27,11 @@ const handleError =
       dispatch(notify.actions.update({
         title: import.meta.env.VITE_ERROR_REQUEST_FAILED
       }));
+    }
+
+    if (exception?.status === 401) {
+      localStorage.removeItem('token');
+      dispatch(user.actions.update(initialState))
     }
   };
 

@@ -37,6 +37,7 @@ const doFetch = async (url: string, config?: any): Promise<any> => {
     options.headers = {
       ...defaultHeaders,
       ...options.headers,
+      'Authorization': 'Bearer ' + localStorage.getItem('token'),
     };
 
     // is json request: stringify body

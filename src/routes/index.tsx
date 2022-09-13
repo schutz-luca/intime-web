@@ -1,6 +1,7 @@
 /**
  * IMPORTS
  */
+import useLogout from "hooks/useLogout";
 import { Routes } from "./routes"
 
 /**
@@ -13,7 +14,7 @@ const RoutesLoader = () => {
     const { pathname } = window.location;
 
     return (
-        <Routes isLocalhost={isLocalhost} basename={pathname}/>
+        <Routes isLocalhost={isLocalhost} basename={pathname} />
     )
 }
 
