@@ -7,5 +7,5 @@ export interface IProps {
   innerRef?: any
   multiple?: boolean
   name: string
-  onPick: (base64: any) => unknown
+  onPick: (info, file?) => unknown
 }

@@ -12,10 +12,22 @@ import { $Content, $FilePicker } from './styles';
  */
 const FilePicker = (props: IProps) => {
 
+  // create file object
+  const create = (file) => {
+    const { name, type } = file;
+
+    const url = window.URL.createObjectURL(file);
+
+    // call pick handler
+    props.onPick({ name, type, url }, file);
+  };
+
   // handle pick files
   const onPick = (event) => {
-    const [file] = event.target.files;
-    props.onPick(file)
+    const { files } = event.target;
+
+    // add each file
+    [].map.call(files, create);
   };
 
   return (

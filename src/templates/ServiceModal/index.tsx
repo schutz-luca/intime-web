@@ -16,7 +16,7 @@ import { notify } from "infra/notify";
 import { IServiceModalProps } from "./index.d";
 import { schema } from "./schema"
 import { MdFileUpload } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toBase64 } from "utils/toBase64";
 import { FilePicker } from "components/form/filepicker";
 import { Thumbnail } from "components/thumbnail";
@@ -31,17 +31,22 @@ export const ServiceModal = (props: IServiceModalProps) => {
     // get dispatch
     const dispatch = useDispatch();
 
+    const form = useRef<HTMLFormElement>();
+
     // use form
-    const { errors, handleSubmit, register } = useForm({
+    const { errors, handleSubmit, register, trigger } = useForm({
         resolver: yupResolver(schema)
     });
 
     const [cover, setCover] = useState(null);
 
     const onPick = async (file) => {
-        const base64 = await toBase64(file);
-        if (base64)
-            setCover(base64);
+        const isValid = await trigger('cover');
+
+        if (!isValid)
+            return setCover(null);
+
+        setCover(file);
     }
 
     useEffect(() => {
@@ -56,12 +61,17 @@ export const ServiceModal = (props: IServiceModalProps) => {
     // handle form submit
     const onSubmit = async (data: any): Promise<void> => {
         try {
+            const formData = new FormData();
+            formData.append("file", data.cover[0]);
+
+            const coverUrl = await http.post("upload", { body: formData, bodyType: 'image', dispatch })
+
             let response = null;
 
             const body = {
                 ...data,
-                cover,
-                providerId: '3ae595a3-25b9-44f6-af3a-762f6c95f738'
+                cover: coverUrl,
+                providerId: id
             }
 
             if (props.isNew)
@@ -92,12 +102,12 @@ export const ServiceModal = (props: IServiceModalProps) => {
 
     return (
         <Modal isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
-            <$ModalForm onSubmit={handleSubmit(onSubmit)}>
+            <$ModalForm onSubmit={handleSubmit(onSubmit)} ref={form}>
                 <h1>{props.isNew ? 'Cadastrar' : 'Editar'} Serviço</h1>
 
                 <$ImageContainer>
                     <Thumbnail
-                        src={cover || service?.cover}
+                        src={cover?.url || service?.cover}
                     />
                     <FilePicker
                         name="cover"

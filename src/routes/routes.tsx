@@ -52,9 +52,9 @@ const Routes = (props: IRoutesProps) => {
                             <Route path="/" exact component={LoginPage} />
                             <Route path="/join" exact component={ClientJoin} />
                             <Route path="/join-provider" exact component={ProviderJoin} />
-                            <Route render={() => <Redirect to="/" />} />
                         </>
                     }
+                    <Route render={() => <Redirect to="/" />} />
                 </motion.div>
             </AnimatePresence>
         </BrowserRouter>
