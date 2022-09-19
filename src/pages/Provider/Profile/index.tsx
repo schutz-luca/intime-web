@@ -15,8 +15,9 @@ import { Button } from "components/button";
 import { MdCameraAlt, MdCheck } from "react-icons/md";
 import { Avatar } from "components/avatar";
 import { FilePicker } from "components/form/filepicker";
-import { toBase64 } from "utils/toBase64";
 import { AddressForm } from "templates/AddressForm";
+import { getFormFile } from "utils/getFormFile";
+import { selectIsLoading } from "features/notify/selectors";
 
 export const ProviderProfile = () => {
 
@@ -25,12 +26,14 @@ export const ProviderProfile = () => {
 
     const { id } = useSelector(selectUser);
 
+    const isLoading = useSelector(selectIsLoading);
+
     const [provider, setProvider] = useState<IProvider>(null);
 
     const [photo, setPhoto] = useState(null);
 
     // use form
-    const { control, errors, handleSubmit, register } = useForm({
+    const { control, errors, handleSubmit, register, trigger } = useForm({
         resolver: yupResolver(editSchema)
 
     });
@@ -56,18 +59,26 @@ export const ProviderProfile = () => {
     }, [])
 
     const onPick = async (file) => {
-        const base64 = await toBase64(file);
-        setPhoto(base64);
+        const isValid = await trigger('photo');
+
+        if (!isValid)
+            return setPhoto(null);
+
+        setPhoto(file);
     }
 
     const onSubmit = async (data: any): Promise<void> => {
         try {
+            let photoUrl = await getFormFile(data.photo[0], dispatch);
+
+            if (!photoUrl)
+                photoUrl = provider?.photo;
+
             let response = null;
 
             const body = {
                 ...data,
-                avatar: photo,
-                address: null
+                photo: photoUrl
             }
 
             response = await http.put(`provider/${id}/`, { body, dispatch });
@@ -82,6 +93,7 @@ export const ProviderProfile = () => {
             });
         }
         catch (ex) {
+            console.log(ex);
             notify({
                 title: 'Não foi possível salvar o perfil',
                 message: 'Tente novamente mais tarde',
@@ -101,9 +113,9 @@ export const ProviderProfile = () => {
 
                 <$Form onSubmit={handleSubmit(onSubmit)}>
                     <$AvatarContainer>
-                        <Avatar src={photo || provider?.photo} size="200px" />
+                        <Avatar src={photo?.url || provider?.photo} size="200px" />
                         <FilePicker
-                            name="avatar"
+                            name="photo"
                             innerRef={register}
                             onPick={onPick}
                             icon={<MdCameraAlt />}
@@ -120,15 +132,15 @@ export const ProviderProfile = () => {
                             isEditing={true}
                         />
                     }
-                    <$Divisor>
+                    {/* <$Divisor>
                         Endereço
                     </$Divisor>
                     <AddressForm
                         control={control}
                         errors={errors}
                         register={register}
-                    />
-                    <Button>
+                    /> */}
+                    <Button disabled={isLoading}>
                         Salvar
                     </Button>
                 </$Form>

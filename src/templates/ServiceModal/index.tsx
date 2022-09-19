@@ -21,6 +21,7 @@ import { toBase64 } from "utils/toBase64";
 import { FilePicker } from "components/form/filepicker";
 import { Thumbnail } from "components/thumbnail";
 import { $ImageContainer } from "./styles";
+import { getFormFile } from "utils/getFormFile";
 
 /**
  * I am the service modal form
@@ -61,10 +62,10 @@ export const ServiceModal = (props: IServiceModalProps) => {
     // handle form submit
     const onSubmit = async (data: any): Promise<void> => {
         try {
-            const formData = new FormData();
-            formData.append("file", data.cover[0]);
+            let coverUrl = await getFormFile(data.cover[0], dispatch);
 
-            const coverUrl = await http.post("upload", { body: formData, bodyType: 'image', dispatch })
+            if (!coverUrl)
+                coverUrl = service?.cover;
 
             let response = null;
 
