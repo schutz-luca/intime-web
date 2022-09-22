@@ -1,7 +1,8 @@
 /**
  * IMPORTS
  */
-import { IProvider } from "../../constants/types";
+import { IOption } from "components/form/select/select";
+import { ICategory, IProvider } from "../../constants/types";
 
 export interface IProviderFormProps {
     isEditing?: boolean
@@ -9,4 +10,5 @@ export interface IProviderFormProps {
     control: any
     register: any
     provider?: IProvider
+    categories?: IOption[]
 }

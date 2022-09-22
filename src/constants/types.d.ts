@@ -29,6 +29,7 @@ export interface IProvider {
     birthDate: string
     phone: string
     address: IAddress
+    category: ICategory
 }
 
 export interface IClient {
@@ -48,4 +49,10 @@ export interface IScheduling {
     startDate: string
     endDate: string
     product: IService
+}
+
+export interface ICategory {
+    id: string
+    name: string
+    description: string
 }

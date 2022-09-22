@@ -12,6 +12,7 @@ const schema = yup.object().shape({
   phone: yup.string().required('Digite seu celular'),
   cpf: yup.string().required('Digite seu CPF'),
   birthDate: yup.string().required('Digite sua data de nascimento'),
+  category: yup.string().required('Selecione uma categoria de serviço'),
   confirmPassword: yup.string().required('Digite a confirmação da senha')
     .oneOf([yup.ref('password'), null], 'Confirmação divergente'),
 });

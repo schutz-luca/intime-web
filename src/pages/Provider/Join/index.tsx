@@ -16,6 +16,9 @@ import { LoginLayout } from "layouts/LoginLayout"
 import { $Form } from "pages/LoginPage/styles";
 import { schema } from "../../../templates/ProviderForm/schema";
 import { ProviderForm } from 'templates/ProviderForm';
+import { useEffect, useState } from 'react';
+import { ICategory } from 'constants/types';
+import { IOption } from 'components/form/select/select.d';
 
 /**
  * I am the login page
@@ -34,6 +37,31 @@ export const ProviderJoin = () => {
     });
 
     const isLoading = useSelector(selectIsLoading);
+
+    const [categories, setCategories] = useState<IOption[]>([]);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await http.get('category', { dispatch });
+
+                if (!response)
+                    throw Error
+
+                let formattedCategories: IOption[] = response.map((category: ICategory) => { return { name: category.name, value: category.id } });
+                formattedCategories.unshift({ name: "", value: null });
+
+                setCategories(formattedCategories);
+            }
+            catch (ex) {
+                notify({
+                    title: 'Não foi possível resgatar as categorias de serviço',
+                    message: 'Tente novamente mais tarde',
+                    type: 'danger'
+                })
+            }
+        })()
+    }, []);
 
     // handle form submit
     const onSubmit = async (data: any): Promise<void> => {
@@ -67,7 +95,7 @@ export const ProviderJoin = () => {
             <p>Preencha com as suas informações </p>
             <p>e comece a usar a plataforma!</p>
             <$Form onSubmit={handleSubmit(onSubmit)}>
-                <ProviderForm control={control} errors={errors} register={register} />
+                <ProviderForm control={control} errors={errors} register={register} categories={categories} />
 
                 <Button disabled={isLoading}>
                     {isLoading ? 'Cadastrando...' : 'Cadastrar'}

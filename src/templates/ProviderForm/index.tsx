@@ -3,6 +3,7 @@
  */
 import { Field } from "components/form/field";
 import { Input } from "components/form/input";
+import { Select } from "components/form/select";
 import { formatInputDate } from "utils/dateUtils";
 import { IProviderFormProps } from "./index.d";
 
@@ -46,6 +47,16 @@ export const ProviderForm = (props: IProviderFormProps) => (
                 formatChars={{ 9: '[0-9]' }}
                 maskChar={null}
                 name="phone"
+            />
+        </Field>
+
+        <Field error={props.errors.category?.message} label="Categoria de Serviço">
+            <Select
+                name="category"
+                innerRef={props.register}
+                options={props?.categories}
+                value={props.provider?.category.id}
+                disabled={props.isEditing}
             />
         </Field>
 

@@ -26,12 +26,13 @@ const Select = (props: IProps): React.ReactElement => {
   return (
     <$Select>
       <select
+        {...props}
         name={props.name}
         onChange={handleChange}
         ref={props.innerRef}
         value={value}
       >
-        {props.options.map(option => (
+        {props.options && props.options.map(option => (
           <option key={option.value} value={option.value}>
             {option.name}
           </option>

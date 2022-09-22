@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Title } from "components/title"
-import { IProvider } from "constants/types";
+import { ICategory, IProvider } from "constants/types";
 import { selectUser } from "features/user/selectors";
 import http from "infra/http";
 import { notify } from "infra/notify";
@@ -12,12 +12,13 @@ import { useForm } from "react-hook-form";
 import { ProviderForm } from "templates/ProviderForm";
 import { $AvatarContainer, $ProfileContainer, $Form, $Divisor } from "./styles";
 import { Button } from "components/button";
-import { MdCameraAlt, MdCheck } from "react-icons/md";
+import { MdCameraAlt } from "react-icons/md";
 import { Avatar } from "components/avatar";
 import { FilePicker } from "components/form/filepicker";
 import { AddressForm } from "templates/AddressForm";
 import { getFormFile } from "utils/getFormFile";
 import { selectIsLoading } from "features/notify/selectors";
+import { IOption } from "components/form/select/select.d";
 
 export const ProviderProfile = () => {
 
@@ -57,6 +58,31 @@ export const ProviderProfile = () => {
             }
         })()
     }, [])
+
+    const [categories, setCategories] = useState<IOption[]>([]);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await http.get('category', { dispatch });
+
+                if (!response)
+                    throw Error
+
+                let formattedCategories: IOption[] = response.map((category: ICategory) => { return { name: category.name, value: category.id } });
+                formattedCategories.unshift({ name: "", value: null });
+
+                setCategories(formattedCategories);
+            }
+            catch (ex) {
+                notify({
+                    title: 'Não foi possível resgatar as categorias de serviço',
+                    message: 'Tente novamente mais tarde',
+                    type: 'danger'
+                })
+            }
+        })()
+    }, []);
 
     const onPick = async (file) => {
         const isValid = await trigger('photo');
@@ -130,6 +156,7 @@ export const ProviderProfile = () => {
                             register={register}
                             provider={provider}
                             isEditing={true}
+                            categories={categories}
                         />
                     }
                     {/* <$Divisor>
