@@ -72,7 +72,7 @@ export const ServiceModal = (props: IServiceModalProps) => {
             const body = {
                 ...data,
                 cover: coverUrl,
-                providerId: id
+                provider: { id }
             }
 
             if (props.isNew)
