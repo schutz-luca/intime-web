@@ -49,3 +49,9 @@ export const $Link = styled(NavLink)`
     color: ${props=>props.theme.colors.primary};
     margin: 0 5px;
 `
+
+export const $Title = styled.h1`
+    @media ${devices.tablet}{
+        display: none;
+    }
+`

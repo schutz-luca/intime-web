@@ -13,7 +13,7 @@ import { selectIsLoading } from "features/notify/selectors";
 import user from "features/user";
 import { LoginLayout } from "layouts/LoginLayout"
 import { schema } from "./schema";
-import { $CheckContainer, $Form, $Link } from "./styles";
+import { $Title, $Form, $Link } from "./styles";
 import http from 'infra/http';
 import { useHistory } from 'react-router';
 import { notify } from 'infra/notify';
@@ -68,7 +68,7 @@ export const LoginPage = () => {
 
     return (
         <LoginLayout leftImage={LoginImage}>
-            <h1>inTime</h1>
+            <$Title>inTime</$Title>
             <p>O lugar perfeito para você ganhar tempo</p>
             <$Form onSubmit={handleSubmit(onSubmit)}>
                 <Field error={errors.email?.message} label="Email">
