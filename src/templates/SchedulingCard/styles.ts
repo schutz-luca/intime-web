@@ -8,6 +8,10 @@ export const $SelectButton = styled(Button)`
     margin-top: 10px;
 `
 
+export const $CardTitle = styled.div`
+    margin: 6px 0;
+`
+
 export const $Time = styled.div`
     width: 100%;
     display: flex;
@@ -36,7 +40,11 @@ export const $Content = styled.div`
     flex-direction: column;
     align-items: center;
 
-    .provider{
+    p{
         font-size: 14px;
+    }
+
+    .provider{
+        font-size: 16px;
     }
 `

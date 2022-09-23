@@ -19,6 +19,7 @@ import { notify } from "infra/notify";
 import { addMinutes } from "utils/dateUtils";
 import { ISchedulingModalProps } from "./index.d";
 import { schema } from "./schema"
+import { Row } from "components/form/row";
 
 /**
  * I am the scheduling modal from
@@ -83,7 +84,8 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
     return (
         <Modal isOpen={props.isOpen} setIsOpen={props.setIsOpen}>
             <$ModalForm onSubmit={handleSubmit(onSubmit)}>
-                <h1>Criar Agendamento</h1>
+                <p>Agendar</p>
+                <h1>{service?.name}</h1>
                 <Field error={errors.payment?.message} label="Pagamento">
                     <Select
                         name="payment"
@@ -92,23 +94,25 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
                     />
                 </Field>
 
-                <Field error={errors.startDate?.message} label="Horário">
-                    <Input
-                        name="startDate"
-                        innerRef={register}
-                        type="datetime-local"
-                    />
-                </Field>
+                <Row>
+                    <Field error={errors.startDate?.message} label="Horário">
+                        <Input
+                            name="startDate"
+                            innerRef={register}
+                            type="datetime-local"
+                        />
+                    </Field>
 
-                <Field error={errors.endDate?.message} label="Término">
-                    <Input
-                        name="endDate"
-                        innerRef={register}
-                        type="datetime-local"
-                        value={endDate}
-                        disabled
-                    />
-                </Field>
+                    <Field error={errors.endDate?.message} label="Término">
+                        <Input
+                            name="endDate"
+                            innerRef={register}
+                            type="datetime-local"
+                            value={endDate}
+                            disabled
+                        />
+                    </Field>
+                </Row>
 
                 <Button disabled={isLoading}>
                     {isLoading ? 'Criando...' : 'Criar'}

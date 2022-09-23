@@ -11,7 +11,7 @@ import { ptBR } from "date-fns/locale";
  */
 export const getHoursString = (date: string) => {
     if (date)
-        return format(new Date(date), 'HH\':\'MM', { locale: ptBR })
+        return format(new Date(date), 'HH\':\'mm', { locale: ptBR })
 }
 
 /**
