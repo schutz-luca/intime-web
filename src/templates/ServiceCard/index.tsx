@@ -2,16 +2,16 @@
  * IMPORTS
  */
 import { useDispatch } from "react-redux";
-import { Thumbnail } from "components/thumbnail";
+import { useEffect, useState } from "react";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { Card } from "components/card";
+import { $CardContent } from "components/card/styles";
+import { Thumbnail } from "components/thumbnail";
+import { IProvider } from "constants/types";
 import { notify } from "infra/notify";
 import http from "infra/http";
-import { $ButtonsContainer, $CardTitle, $DeleteButton, $SelectButton } from "./styles"
 import { IServiceCardProps } from "./index.d"
-import { MdCheck, MdDelete, MdEdit } from "react-icons/md";
-import { Avatar } from "components/avatar";
-import { useEffect, useState } from "react";
-import { IProvider } from "constants/types";
+import { $ButtonsContainer, $CardTitle, $DeleteButton, $SelectButton } from "./styles"
 
 /**
  * I am the service card, reactive according to provider view or client view
@@ -21,26 +21,7 @@ export const ServiceCard = (props: IServiceCardProps) => {
     // get dispatch
     const dispatch = useDispatch();
 
-    // const [provider, setProvider] = useState<IProvider | null>(null)
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             const response: IProvider = await http.get(`provider/${props.service.provider}`, { dispatch });
-
-    //             if (!response)
-    //                 throw Error;
-
-    //             setProvider(response)
-    //         }
-    //         catch (ex) {
-    //             notify({
-    //                 title: 'Não foi possível resgatar o prestador',
-    //                 message: 'Tente novamente mais tarde',
-    //                 type: 'danger'
-    //             })
-    //         }
-    //     })()
-    // }, [])
+    const provider = props?.service?.provider;
 
     const deleteService = async () => {
         try {
@@ -65,36 +46,38 @@ export const ServiceCard = (props: IServiceCardProps) => {
         }
     }
 
-    return (
-        <Card key={props.service.id}>
-            <Thumbnail src={props.service.cover} />
+    const selectCard = () => props.selectCard({ ...props.service })
 
-            <$CardTitle>
-                <h2>{props.service.name}</h2>
-                <h3>R$ {props.service.price}</h3>
-                <p>{props.service.description}</p>
-            </$CardTitle>
-            <$ButtonsContainer>
-                <$SelectButton onClick={() => props.selectCard({ ...props.service })}>
-                    {props.isProvider ?
-                        <>
-                            <MdEdit />
-                            Editar
-                        </>
-                        :
-                        <>
-                            <MdCheck />
-                            Selecionar
-                        </>
-                    }
-                </$SelectButton>
-                {props.isProvider &&
-                    <$DeleteButton onClick={deleteService}>
-                        <MdDelete />
-                        Excluir
-                    </$DeleteButton>
-                }
-            </$ButtonsContainer>
+    return (
+        <Card key={props.service.id} onClick={!props.isProvider && selectCard}>
+            <$CardContent>
+                <Thumbnail src={props.service.cover} />
+                <div className="info">
+                    <$CardTitle>
+                        <h2>{props.service.name}</h2>
+                        <h3>R$ {props.service.price}</h3>
+                        {!props.isProvider &&
+                            <>
+                                <p>{provider?.fullname}</p>
+                                <small>{provider?.category?.name}</small>
+                            </>
+                        }
+                        {/* <p>{props.service.description}</p> */}
+                    </$CardTitle>
+                    <$ButtonsContainer>
+                        {props.isProvider &&
+                            <>
+                                <$SelectButton onClick={() => props.selectCard({ ...props.service })}>
+                                    <MdEdit />
+                                </$SelectButton>
+                                <$DeleteButton onClick={deleteService}>
+                                    <MdDelete />
+                                </$DeleteButton>
+                            </>
+                        }
+                    </$ButtonsContainer>
+                </div>
+            </$CardContent>
         </Card >
     )
 }

@@ -54,16 +54,16 @@ export const ClientSchedulings = () => {
                 subtitle="Gerencia sua agenda"
             />
         }>
-            <$CardContainer variants={variants}>
-                {schedulings.length > 0 ?
-                    schedulings.map(scheduling => SchedulingCard({ updateList: updateList, scheduling }))
-                    :
-                    <EmptyState
-                        description="Não há nenhum agendamento disponível"
-                        icon={FaRobot}
-                    />
-                }
-            </$CardContainer>
+            {schedulings.length > 0 ?
+                <$CardContainer variants={variants}>
+                    {schedulings.map(scheduling => <SchedulingCard updateList={updateList} scheduling={scheduling} key={scheduling.id} />)}
+                </$CardContainer>
+                :
+                <EmptyState
+                    description="Não há nenhum agendamento disponível"
+                    icon={FaRobot}
+                />
+            }
         </Content>
     )
 }

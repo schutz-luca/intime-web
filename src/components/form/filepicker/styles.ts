@@ -9,6 +9,7 @@ import styled from 'styled-components';
 */
 const $Content = styled.div`
   margin-left: 0.5rem;
+  font-size: 14px;
 `;
 
 

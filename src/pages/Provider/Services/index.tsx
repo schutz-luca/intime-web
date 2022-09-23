@@ -15,7 +15,7 @@ import { $ButtonContainer, $CreateButton } from "./styles";
 import { MdAdd, MdCreate } from "react-icons/md";
 import { ServiceModal } from "templates/ServiceModal";
 import { EmptyState } from "components/emptystate";
-import {FaRobot} from "react-icons/fa";
+import { FaRobot } from "react-icons/fa";
 
 /**
  * I am the Home Page
@@ -88,7 +88,7 @@ export const ListServices = () => {
 
             <$CardContainer>
                 {services.length > 0 ?
-                     services.map(service => ServiceCard({ isProvider: true, selectCard: openEditModal, service, updateList })) 
+                    services.map(service => <ServiceCard selectCard={openEditModal} isProvider={true} service={service} key={service.id} updateList={updateList} />)
                     :
                     <EmptyState
                         description="Não há nenhum registro para exibição"

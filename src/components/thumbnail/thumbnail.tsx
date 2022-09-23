@@ -9,7 +9,7 @@ import { $ServiceImage } from "./styles";
  * I am a thumnail component
  */
 export const Thumbnail = (props: IThumbailProps) => (
-    <$ServiceImage>
+    <$ServiceImage className={props.size}>
         {props.src ?
             <img src={props.src} alt="service image" />
             :

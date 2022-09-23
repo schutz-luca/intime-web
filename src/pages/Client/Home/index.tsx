@@ -71,7 +71,7 @@ export const ClientHome = () => {
             />
             <$CardContainer variants={variants}>
                 {services.length > 0 ?
-                    services.map(service => ServiceCard({ selectCard: openCreateModal, service }))
+                    services.map(service => <ServiceCard selectCard={openCreateModal} service={service} key={service.id}/>)
                     :
                     <EmptyState
                         description="Não há nenhum serviço disponível"

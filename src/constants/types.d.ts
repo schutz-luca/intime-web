@@ -3,7 +3,6 @@ export interface IService {
     name: string
     price: number;
     description: string
-    provider: string
     duration: number
     cover: string
     provider: IProvider

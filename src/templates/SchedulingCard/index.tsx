@@ -9,14 +9,18 @@ import { notify } from "infra/notify";
 import { formatStringDate, getHoursString } from "utils/dateUtils";
 import { nameToValue } from "utils/nameToValue";
 import { ISchedulingCardProps } from "./index.d"
-import { $SelectButton, $Time } from "./styles"
+import { $SelectButton, $Time, $Content } from "./styles"
 import { Thumbnail } from "components/thumbnail";
 import { $CardTitle } from "templates/ServiceCard/styles";
+import { IProvider } from "constants/types";
+import { useState, useEffect } from "react";
 
 /**
  * I am the scheduling card, reactive according to provider view or client view
  */
 export const SchedulingCard = (props: ISchedulingCardProps) => {
+
+    const provider = props.scheduling?.product?.provider;
 
     // get dispatch
     const dispatch = useDispatch();
@@ -46,25 +50,30 @@ export const SchedulingCard = (props: ISchedulingCardProps) => {
 
     return (
         <Card key={props.scheduling.id}>
-            <Thumbnail src={props.scheduling.product.cover} />
-            <$CardTitle>
-                <h2>{props.scheduling.product.name}</h2>
-                <p>{props.scheduling.product.description}</p>
-            </$CardTitle>
-            <p>{nameToValue(paymentTypes, props.scheduling.payment)}</p>
-            <$Time>
+            <$Content>
+                <Thumbnail src={props.scheduling.product.cover} size={"med"} />
                 <div>
-                    <h1>{getHoursString(props.scheduling.startDate)}</h1>
-                    <p>Até</p>
-                    <h1>{getHoursString(props.scheduling.endDate)}</h1>
+                    <$CardTitle>
+                        <h2>{props.scheduling.product.name}</h2>
+                    </$CardTitle>
+                    <p>{nameToValue(paymentTypes, props.scheduling.payment)}</p>
+                    <$Time>
+                        <h1>{getHoursString(props.scheduling.startDate)}</h1>
+                        <p>Até</p>
+                        <h1>{getHoursString(props.scheduling.endDate)}</h1>
+                        <p>{formatStringDate(props.scheduling.startDate)}</p>
+                    </$Time>
+                    {!props?.isProvider &&
+                        <div>
+                            <p className="provider">{provider?.fullname}</p>
+                        </div>
+                    }
+
+                    <$SelectButton onClick={deleteScheduling}>
+                        Cancelar
+                    </$SelectButton>
                 </div>
-                <p>{formatStringDate(props.scheduling.startDate)}</p>
-            </$Time>
-
-
-            <$SelectButton onClick={deleteScheduling}>
-                Cancelar
-            </$SelectButton>
+            </$Content>
         </Card >
     )
 }

@@ -16,6 +16,7 @@ import { ListServices } from "pages/Provider/Services";
 import { ProviderProfile } from "pages/Provider/Profile";
 import { ClientProfile } from "pages/Client/Profile";
 import { ClientSchedulings } from "pages/Client/Schedulings";
+import { ProviderSchedulings } from "pages/Provider/Schedulings";
 
 const Routes = (props: IRoutesProps) => {
 
@@ -34,7 +35,7 @@ const Routes = (props: IRoutesProps) => {
                         <MainLayout>
                             {role === RoleEnum.PROVIDER &&
                                 <>
-                                    <Route path="/" exact component={ClientSchedulings} />
+                                    <Route path="/" exact component={ProviderSchedulings} />
                                     <Route path="/profile" exact component={ProviderProfile} />
                                     <Route path="/services" exact component={ListServices} />
                                 </>
@@ -52,9 +53,9 @@ const Routes = (props: IRoutesProps) => {
                             <Route path="/" exact component={LoginPage} />
                             <Route path="/join" exact component={ClientJoin} />
                             <Route path="/join-provider" exact component={ProviderJoin} />
+                            <Route render={() => <Redirect to="/" />} />
                         </>
                     }
-                    <Route render={() => <Redirect to="/" />} />
                 </motion.div>
             </AnimatePresence>
         </BrowserRouter>

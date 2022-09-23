@@ -22,6 +22,7 @@ import { FilePicker } from "components/form/filepicker";
 import { Thumbnail } from "components/thumbnail";
 import { $ImageContainer } from "./styles";
 import { getFormFile } from "utils/getFormFile";
+import { Row } from "components/form/row";
 
 /**
  * I am the service modal form
@@ -109,6 +110,7 @@ export const ServiceModal = (props: IServiceModalProps) => {
                 <$ImageContainer>
                     <Thumbnail
                         src={cover?.url || service?.cover}
+                        size={"med"}
                     />
                     <FilePicker
                         name="cover"
@@ -119,40 +121,43 @@ export const ServiceModal = (props: IServiceModalProps) => {
                         Selecionar uma imagem para o serviço
                     </FilePicker>
                 </$ImageContainer>
+                <Row>
 
-                <Field error={errors.name?.message} label="Nome">
-                    <Input
-                        name="name"
-                        innerRef={register}
-                        defaultValue={service?.name}
-                    />
-                </Field>
+                    <Field error={errors.name?.message} label="Nome">
+                        <Input
+                            name="name"
+                            innerRef={register}
+                            defaultValue={service?.name}
+                        />
+                    </Field>
 
-                <Field error={errors.description?.message} label="Descrição">
-                    <Input
-                        name="description"
-                        innerRef={register}
-                        defaultValue={service?.description}
-                    />
-                </Field>
+                    <Field error={errors.description?.message} label="Descrição">
+                        <Input
+                            name="description"
+                            innerRef={register}
+                            defaultValue={service?.description}
+                        />
+                    </Field>
+                </Row>
+                <Row>
+                    <Field error={errors.price?.price} label="Preço">
+                        <Input
+                            name="price"
+                            innerRef={register}
+                            defaultValue={service?.price}
+                            type="number"
+                        />
+                    </Field>
 
-                <Field error={errors.price?.price} label="Preço">
-                    <Input
-                        name="price"
-                        innerRef={register}
-                        defaultValue={service?.price}
-                        type="number"
-                    />
-                </Field>
-
-                <Field error={errors.duration?.duration} label="Duração (minutos)">
-                    <Input
-                        name="duration"
-                        innerRef={register}
-                        defaultValue={service?.duration}
-                        type="number"
-                    />
-                </Field>
+                    <Field error={errors.duration?.duration} label="Duração (minutos)">
+                        <Input
+                            name="duration"
+                            innerRef={register}
+                            defaultValue={service?.duration}
+                            type="number"
+                        />
+                    </Field>
+                </Row>
 
 
 

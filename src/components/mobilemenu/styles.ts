@@ -16,6 +16,10 @@ export const $MenuMobile = styled.div`
  color: ${props => props.theme.neutral8};
  transition: left ease 1s;
  
+ @media ${devices.tablet}{
+    top: 60px;
+ }
+
  &.open{
   left: 0;
  }

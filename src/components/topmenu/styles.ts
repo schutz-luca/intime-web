@@ -16,6 +16,10 @@ export const $TopMenuContainer = styled.header`
     top: 0;
     z-index: 3;
     padding: 0;
+
+    @media ${devices.tablet}{
+        height: 60px;
+    }
 `
 
 export const $TopMenuContent = styled.div`
@@ -54,6 +58,10 @@ export const $TopMenuOptions = styled.div`
 
 export const $Logo = styled.img`
     height: 70px;
+
+    @media ${devices.tablet}{
+        height: 50px;
+    }
 `
 
 export const $MenuButton = styled(Button)`
