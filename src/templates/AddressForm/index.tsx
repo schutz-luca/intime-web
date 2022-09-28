@@ -12,7 +12,6 @@ import { IAddressFormProps } from "./index.d";
  * I am the address form
  */
 export const AddressForm = (props: IAddressFormProps) => {
-
     return (
         <>
             <Row>
@@ -20,16 +19,16 @@ export const AddressForm = (props: IAddressFormProps) => {
                     <Input
                         name="zipCode"
                         control={props.control}
+                        defaultValue={props.address?.zipCode}
                         mask="99999-999"
                         formatChars={{ 9: '[0-9]' }}
                         maskChar={null}
-                        defaultValue={props.address?.zipCode}
                     />
                 </Field>
                 <Field error={props.errors.street?.message} label="Rua">
                     <Input
                         name="street"
-                        control={props.control}
+                        innerRef={props.register}
                         defaultValue={props.address?.street}
                     />
                 </Field>
@@ -44,11 +43,18 @@ export const AddressForm = (props: IAddressFormProps) => {
                         type="number"
                     />
                 </Field>
-                <Field error={props.errors.email?.district} label="Bairro">
+                <Field error={props.errors.district?.message} label="Bairro">
                     <Input
                         name="district"
                         innerRef={props.register}
                         defaultValue={props.address?.district}
+                    />
+                </Field>
+                <Field error={props.errors.city?.message} label="Cidade">
+                    <Input
+                        name="city"
+                        innerRef={props.register}
+                        defaultValue={props.address?.city}
                     />
                 </Field>
             </Row>
@@ -62,7 +68,7 @@ export const AddressForm = (props: IAddressFormProps) => {
                     />
                 </Field>
 
-                <Field error={props.errors.email?.district} label="Complemento">
+                <Field error={props.errors.complement?.message} label="Complemento">
                     <Input
                         name="complement"
                         innerRef={props.register}
