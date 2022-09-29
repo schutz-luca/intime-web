@@ -22,10 +22,25 @@ const $Error = styled.span`
 
 
 /**
+ * I am a styled label.
+ */
+ const $Label = styled.div`
+ background: ${props => props.theme.background};
+ color: ${props=>props.theme.neutral7};
+ font-size: 0.9rem;
+ font-weight: ${props => props.theme.fonts.weight.bolder};
+ left: 20px;
+ padding: 0 5px;
+ position: absolute;
+ top: 0px;
+ transform: translateY(-50%);
+ z-index: 10;
+`;
+
+/**
  * I am a styled form field.
  */
 const $Field = styled.label`
-  filter: grayscale(1);
   margin-bottom: 1.8rem;
   position: relative;
   transition: filter 0.5s ease-out;
@@ -33,28 +48,13 @@ const $Field = styled.label`
 
   &[data-has-error="true"],
   &:focus-within {
-    filter: none;
     transition: none;
+
+    ${$Label}{
+      color: ${props=>props.theme.colors.primary};
+    }
   }
 `;
-
-
-/**
- * I am a styled label.
- */
-const $Label = styled.div`
-  background: ${props => props.theme.background};
-  color: ${props=>props.theme.colors.primary};
-  font-size: 0.9rem;
-  font-weight: ${props => props.theme.fonts.weight.bolder};
-  left: 20px;
-  padding: 0 5px;
-  position: absolute;
-  top: 0px;
-  transform: translateY(-50%);
-  z-index: 10;
-`;
-
 
 /**
  * EXPORTS

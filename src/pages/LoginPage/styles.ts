@@ -20,7 +20,11 @@ export const $Form = styled.form`
 
  p,small{
      margin-top: 30px;
-     color: ${props=>props.theme.neutral8}
+     color: ${props=>props.theme.neutral8};
+ }
+ .addressObs{
+     margin-top: 0;
+    margin: 10px 0 30px 0;
  }
 `;
 

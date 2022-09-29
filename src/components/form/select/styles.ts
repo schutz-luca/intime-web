@@ -28,7 +28,7 @@ const $Select = styled.div`
   select {
     height: 40px;
     border: none;
-    color: ${props => props.theme.primary};
+    color: ${props => props.theme.neutral7};
     outline: none;
     padding: 8px 0;
     width: 100%;

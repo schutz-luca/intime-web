@@ -11,17 +11,15 @@ import { $Element, $LeftContainer, $LoginLayout, $Logo, $RightContainer, $RightC
  * I am the login layout
  */
 export const LoginLayout = (props: ILoginLayoutProps) => {
-    
-
     return (
         <$LoginLayout>
-            <$Logo src={Logo} />
+            <$Logo src={Logo} className={props.isJoin ? "isJoin" : ''}/>
             <ThemeButton />
             <$LeftContainer>
                 <img src={props.leftImage} alt="login banner" />
             </$LeftContainer>
             <$RightContainer>
-                <$RightContent variants={variants}>
+                <$RightContent variants={variants} className={props.isJoin ? "isJoin" : ''}>
                     {props.children}
                 </$RightContent>
                 <$Element src={Element} alt="" />

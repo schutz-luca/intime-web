@@ -21,7 +21,7 @@ const $Icon = styled.span`
   top: 0;
 
   &.icon{
-    color: ${props=>props.theme.neutral6};
+    color: ${props => props.theme.neutral6};
     
     &:hover{
       transform: none;
@@ -60,7 +60,7 @@ const $Input = styled.div`
     height: 40px;
     border: none;
     border-radius: inherit;
-    color: ${props => props.theme.colors.primaryDark};
+    color: ${props => props.theme.neutral7};
     outline: none;
     padding: 8px 0;
     width: 100%;
