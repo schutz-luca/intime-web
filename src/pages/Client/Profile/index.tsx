@@ -17,6 +17,7 @@ import { Avatar } from "components/avatar";
 import { FilePicker } from "components/form/filepicker";
 import { getFormFile } from "utils/getFormFile";
 import { selectIsLoading } from "features/notify/selectors";
+import { AddressForm } from "templates/AddressForm";
 
 export const ClientProfile = () => {
 
@@ -76,11 +77,26 @@ export const ClientProfile = () => {
             let response = null;
 
             const body = {
-                ...data,
-                photo: photoUrl
+                fullname: data.fullname,
+                birthDate: data.birthDate,
+                email: data.email,
+                phone: data.phone,
+                photo: photoUrl,
+                address: {
+                    id: client?.address?.id,
+                    street: data.street,
+                    number: data.number,
+                    district: data.district,
+                    complement: data.complement,
+                    city: data.city,
+                    state: data.state,
+                    zipCode: data.zipCode
+                }
             }
 
             response = await http.put(`client/${id}/`, { body, dispatch });
+
+            setClient({ ...client, address: { ...client.address, id: response?.client?.address?.id } });
 
             if (!response)
                 throw Error;
@@ -123,13 +139,21 @@ export const ClientProfile = () => {
                         </FilePicker>
                     </$AvatarContainer>
                     {client &&
-                        <ClientForm
-                            control={control}
-                            errors={errors}
-                            register={register}
-                            client={client}
-                            isEditing={true}
-                        />
+                        <>
+                            <ClientForm
+                                control={control}
+                                errors={errors}
+                                register={register}
+                                client={client}
+                                isEditing={true}
+                            />
+                            <AddressForm
+                                control={control}
+                                errors={errors}
+                                register={register}
+                                address={client?.address}
+                            />
+                        </>
                     }
                     <Button disabled={isLoading}>
                         Salvar

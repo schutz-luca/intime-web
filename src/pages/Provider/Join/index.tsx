@@ -74,6 +74,7 @@ export const ProviderJoin = () => {
                 category: data.category,
                 cpf: data.cpf,
                 phone: data.phone,
+                password: data.password,
                 address: {
                     street: data.street,
                     number: data.number,

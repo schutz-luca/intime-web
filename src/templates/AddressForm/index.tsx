@@ -17,12 +17,12 @@ export const AddressForm = (props: IAddressFormProps) => {
             <Row>
                 <Field error={props.errors.zipCode?.message} label="CEP">
                     <Input
-                        name="zipCode"
                         control={props.control}
-                        defaultValue={props.address?.zipCode}
+                        defaultValue={!!props.address?.zipCode && props.address?.zipCode}
                         mask="99999-999"
                         formatChars={{ 9: '[0-9]' }}
                         maskChar={null}
+                        name="zipCode"
                     />
                 </Field>
                 <Field error={props.errors.street?.message} label="Rua">
