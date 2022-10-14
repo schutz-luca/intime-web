@@ -25,7 +25,13 @@ const editSchema = yup.object().shape({
   fullname: yup.string().required('Digite seu nome completo'),
   phone: yup.string().required('Digite seu celular'),
   cpf: yup.string().required('Digite seu CPF'),
-  birthDate: yup.string().required('Digite sua data de nascimento')
+  birthDate: yup.string().required('Digite sua data de nascimento'),
+  city: yup.string().required('Digite sua data de nascimento'),
+  district: yup.string().required('Digite seu distrito'),
+  number: yup.string().required('Digite o número do estabelecimento'),
+  state: yup.string().required('Selecione seu estado'),
+  street: yup.string().required('Digite sua rua'),
+  zipCode: yup.string().required('Digite seu CEP'),
 });
 
 

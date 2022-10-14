@@ -27,6 +27,10 @@ export const $Logo = styled.img`
     top: 20px;
     left: 20px;
 
+    &.isJoin{
+        display: none;
+    }
+
     @media ${devices.tablet}{
         left: unset;
     }
@@ -73,8 +77,8 @@ export const $Element = styled.img`
 export const $RightContent = styled(motion.div)`
     display: flex;
     text-align: center;
-    flex-direction: column;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     background: ${props => props.theme.background};
     padding: 20px;
@@ -82,6 +86,16 @@ export const $RightContent = styled(motion.div)`
     width: 500px;
     z-index: 1;
     box-shadow: 0px 1px 4px rgb(0 0 0 / 5%), 0px 4px 16px ${props => props.theme.neutral5}90;
+    overflow: auto;
+
+    &.isJoin {
+        height: 85vh;
+        justify-content: unset;
+
+        @media ${devices.tablet}{
+            height: 100vh;
+        }
+    }
 
     @media ${devices.tablet}{
         height: 100vh;

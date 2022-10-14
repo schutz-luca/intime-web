@@ -86,16 +86,16 @@ export const ListServices = () => {
                 </$CreateButton>
             </$ButtonContainer>
 
-            <$CardContainer>
-                {services.length > 0 ?
-                    services.map(service => <ServiceCard selectCard={openEditModal} isProvider={true} service={service} key={service.id} updateList={updateList} />)
-                    :
-                    <EmptyState
-                        description="Não há nenhum registro para exibição"
-                        icon={FaRobot}
-                    />
-                }
-            </$CardContainer>
+            {services.length > 0 ?
+                <$CardContainer>
+                    {services.map(service => <ServiceCard selectCard={openEditModal} isProvider={true} service={service} key={service.id} updateList={updateList} />)}
+                </$CardContainer>
+                :
+                <EmptyState
+                    description="Não há nenhum registro para exibição"
+                    icon={FaRobot}
+                />
+            }
         </Content>
     )
 }

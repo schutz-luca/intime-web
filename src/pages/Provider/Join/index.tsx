@@ -19,6 +19,7 @@ import { ProviderForm } from 'templates/ProviderForm';
 import { useEffect, useState } from 'react';
 import { ICategory } from 'constants/types';
 import { IOption } from 'components/form/select/select.d';
+import { AddressForm } from 'templates/AddressForm';
 
 /**
  * I am the login page
@@ -66,7 +67,24 @@ export const ProviderJoin = () => {
     // handle form submit
     const onSubmit = async (data: any): Promise<void> => {
         try {
-            const body = { ...data, confirmPassword: undefined, address: null };
+            const body = {
+                fullname: data.fullname,
+                birthDate: data.birthDate,
+                email: data.email,
+                category: data.category,
+                cpf: data.cpf,
+                phone: data.phone,
+                password: data.password,
+                address: {
+                    street: data.street,
+                    number: data.number,
+                    district: data.district,
+                    complement: data.complement,
+                    city: data.city,
+                    state: data.state,
+                    zipCode: data.zipCode
+                }
+            }
             const response = await http.post('provider/signup', { body, dispatch });
 
             if (!response)
@@ -90,13 +108,14 @@ export const ProviderJoin = () => {
     };
 
     return (
-        <LoginLayout leftImage={LoginImage}>
-            <h1>Seja um prestador!</h1>
+        <LoginLayout leftImage={LoginImage} isJoin={true}>
+            <h1>Seja um Prestador</h1>
             <p>Preencha com as suas informações </p>
             <p>e comece a usar a plataforma!</p>
             <$Form onSubmit={handleSubmit(onSubmit)}>
                 <ProviderForm control={control} errors={errors} register={register} categories={categories} />
-
+                <p className="addressObs">Preencha com o endereço de onde será prestado o serviço</p>
+                <AddressForm control={control} errors={errors} register={register} />
                 <Button disabled={isLoading}>
                     {isLoading ? 'Cadastrando...' : 'Cadastrar'}
                 </Button>

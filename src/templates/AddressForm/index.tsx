@@ -12,24 +12,23 @@ import { IAddressFormProps } from "./index.d";
  * I am the address form
  */
 export const AddressForm = (props: IAddressFormProps) => {
-
     return (
         <>
             <Row>
                 <Field error={props.errors.zipCode?.message} label="CEP">
                     <Input
-                        name="zipCode"
                         control={props.control}
+                        defaultValue={!!props.address?.zipCode && props.address?.zipCode}
                         mask="99999-999"
                         formatChars={{ 9: '[0-9]' }}
                         maskChar={null}
-                        defaultValue={props.address?.zipCode}
+                        name="zipCode"
                     />
                 </Field>
                 <Field error={props.errors.street?.message} label="Rua">
                     <Input
                         name="street"
-                        control={props.control}
+                        innerRef={props.register}
                         defaultValue={props.address?.street}
                     />
                 </Field>
@@ -44,7 +43,7 @@ export const AddressForm = (props: IAddressFormProps) => {
                         type="number"
                     />
                 </Field>
-                <Field error={props.errors.email?.district} label="Bairro">
+                <Field error={props.errors.district?.message} label="Bairro">
                     <Input
                         name="district"
                         innerRef={props.register}
@@ -53,6 +52,13 @@ export const AddressForm = (props: IAddressFormProps) => {
                 </Field>
             </Row>
             <Row>
+                <Field error={props.errors.city?.message} label="Cidade">
+                    <Input
+                        name="city"
+                        innerRef={props.register}
+                        defaultValue={props.address?.city}
+                    />
+                </Field>
                 <Field error={props.errors.state?.message} label="Estado">
                     <Select
                         name="state"
@@ -61,15 +67,14 @@ export const AddressForm = (props: IAddressFormProps) => {
                         options={brazilStates}
                     />
                 </Field>
-
-                <Field error={props.errors.email?.district} label="Complemento">
-                    <Input
-                        name="complement"
-                        innerRef={props.register}
-                        defaultValue={props.address?.complement}
-                    />
-                </Field>
             </Row>
+            <Field error={props.errors.complement?.message} label="Complemento">
+                <Input
+                    name="complement"
+                    innerRef={props.register}
+                    defaultValue={props.address?.complement}
+                />
+            </Field>
         </>
     )
 }

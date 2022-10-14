@@ -103,8 +103,23 @@ export const ProviderProfile = () => {
             let response = null;
 
             const body = {
-                ...data,
-                photo: photoUrl
+                fullname: data.fullname,
+                birthDate: data.birthDate,
+                email: data.email,
+                category: data.category,
+                cpf: data.cpf,
+                phone: data.phone,
+                photo: photoUrl,
+                address: {
+                    id: provider.address.id,
+                    street: data.street,
+                    number: data.number,
+                    district: data.district,
+                    complement: data.complement,
+                    city: data.city,
+                    state: data.state,
+                    zipCode: data.zipCode
+                }
             }
 
             response = await http.put(`provider/${id}/`, { body, dispatch });
@@ -159,14 +174,17 @@ export const ProviderProfile = () => {
                             categories={categories}
                         />
                     }
-                    {/* <$Divisor>
-                        Endereço
+                    <$Divisor>
+                        Endereço do Estabelecimento
                     </$Divisor>
-                    <AddressForm
-                        control={control}
-                        errors={errors}
-                        register={register}
-                    /> */}
+                    {provider?.address &&
+                        <AddressForm
+                            control={control}
+                            errors={errors}
+                            register={register}
+                            address={provider?.address}
+                        />
+                    }
                     <Button disabled={isLoading}>
                         Salvar
                     </Button>

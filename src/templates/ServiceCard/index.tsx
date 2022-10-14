@@ -55,6 +55,7 @@ export const ServiceCard = (props: IServiceCardProps) => {
                 <div className="info">
                     <$CardTitle>
                         <h2>{props.service.name}</h2>
+                        <p className="description">{props.service.description}</p>
                         <h3>R$ {props.service.price}</h3>
                         {!props.isProvider &&
                             <>
@@ -62,7 +63,6 @@ export const ServiceCard = (props: IServiceCardProps) => {
                                 <small>{provider?.category?.name}</small>
                             </>
                         }
-                        {/* <p>{props.service.description}</p> */}
                     </$CardTitle>
                     <$ButtonsContainer>
                         {props.isProvider &&

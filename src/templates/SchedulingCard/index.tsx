@@ -9,11 +9,8 @@ import { notify } from "infra/notify";
 import { formatStringDate, getHoursString } from "utils/dateUtils";
 import { nameToValue } from "utils/nameToValue";
 import { ISchedulingCardProps } from "./index.d"
-import { $SelectButton, $Time, $Content } from "./styles"
+import { $SelectButton, $Time, $Content, $CardTitle } from "./styles"
 import { Thumbnail } from "components/thumbnail";
-import { $CardTitle } from "templates/ServiceCard/styles";
-import { IProvider } from "constants/types";
-import { useState, useEffect } from "react";
 
 /**
  * I am the scheduling card, reactive according to provider view or client view

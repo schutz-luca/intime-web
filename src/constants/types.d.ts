@@ -9,6 +9,7 @@ export interface IService {
 }
 
 export interface IAddress {
+    id: string
     street: string
     number: string
     district: string

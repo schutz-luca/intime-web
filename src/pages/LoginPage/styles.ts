@@ -20,7 +20,11 @@ export const $Form = styled.form`
 
  p,small{
      margin-top: 30px;
-     color: ${props=>props.theme.neutral8}
+     color: ${props=>props.theme.neutral8};
+ }
+ .addressObs{
+     margin-top: 0;
+    margin: 10px 0 30px 0;
  }
 `;
 
@@ -48,4 +52,10 @@ export const $CheckContainer = styled.div`
 export const $Link = styled(NavLink)`
     color: ${props=>props.theme.colors.primary};
     margin: 0 5px;
+`
+
+export const $Title = styled.h1`
+    @media ${devices.tablet}{
+        display: none;
+    }
 `

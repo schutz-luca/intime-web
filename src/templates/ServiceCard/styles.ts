@@ -16,18 +16,22 @@ export const $CardTitle = styled.div`
     }
 
     h3{
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 200;
     }
 
     h2{
-        font-size: 18px;
-        line-height: 42px;
+        font-size: 22px;
     }
     p{
         font-size: 14px;
         opacity: 0.9;
         margin-top: 5px;
+
+        &.description{
+            margin: 0;
+            margin-bottom: 8px;
+        }
     }
     
     small {
