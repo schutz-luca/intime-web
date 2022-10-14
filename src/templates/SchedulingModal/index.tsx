@@ -36,10 +36,38 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
 
     const watchStartDate = watch("startDate", null);
     const [endDate, setEndState] = useState(null);
+    const [available, setAvailable] = useState(true);
 
     useEffect(() => {
         setEndState(addMinutes(watchStartDate, service?.duration));
     }, [watchStartDate])
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const body = {
+                    startDate: watchStartDate,
+                    endDate,
+                    providerId: service?.provider?.id
+                }
+
+                const response = await http.post('scheduling/check', { body, dispatch });
+
+                if (!response)
+                    throw Error;
+
+                setAvailable(!!response?.isAvailable);
+            }
+            catch (ex) {
+                console.log(ex);
+                notify({
+                    title: 'Não foi possível listar os serviços disponíveis',
+                    message: 'Tente novamente mais tarde',
+                    type: 'danger'
+                })
+            }
+        })()
+    }, [endDate])
 
     const { id } = useSelector(selectUser);
 
@@ -110,7 +138,10 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
                     />
                 </Field>
 
-                <Button disabled={isLoading}>
+                {(watchStartDate && !available) && "Horário indisponível, por favor tente selecionar um horário diferente"}
+
+
+                <Button disabled={isLoading || !available}>
                     {isLoading ? 'Criando...' : 'Criar'}
                 </Button>
             </$ModalForm >

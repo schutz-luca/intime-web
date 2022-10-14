@@ -50,13 +50,11 @@ export const dateToString = (date: Date) => {
  */
 export const addMinutes = (date, minutes) => {
     try {
-        date = new Date(date)
         if (date) {
+            date = new Date(date)
             const newDate = new Date(date.getTime() + minutes * 60000);
             return dateToString(newDate)
         }
-
-        throw Error
     }
     catch (err) {
         console.error(err);
