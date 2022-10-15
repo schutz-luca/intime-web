@@ -63,10 +63,14 @@ export const SchedulingCard = (props: ISchedulingCardProps) => {
                             </div>
                             <p className="date">{formatStringDate(props.scheduling.startDate)}</p>
                         </$Time>
-                        {!props.isProvider &&
+                        {!props.isProvider ?
                             <>
                                 <p>{provider?.fullname}</p>
                                 <small>{provider?.category?.name}</small>
+                            </>
+                            :
+                            <>
+                                <p>{props.scheduling.client.fullname}</p>
                             </>
                         }
                     </$CardTitle>

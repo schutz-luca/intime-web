@@ -45,7 +45,7 @@ export interface IClient {
 export interface IScheduling {
     id: string
     payment: string
-    client: string
+    client: IClient
     startDate: string
     endDate: string
     product: IService
