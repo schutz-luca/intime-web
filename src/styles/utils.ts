@@ -16,3 +16,9 @@ export const $Error = styled.div`
     margin-top: -20px;
     margin-bottom: 10px;
 `
+
+export const $AlignCenter = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`

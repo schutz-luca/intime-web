@@ -3,6 +3,7 @@
  */
 import styled from "styled-components";
 import { Button } from "components/button";
+import { devices } from "styles/devices";
 
 export const $SelectButton = styled(Button)`
     margin-top: 10px;
@@ -13,25 +14,29 @@ export const $CardTitle = styled.div`
 `
 
 export const $Time = styled.div`
-    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: align-center;
     color: ${props => props.theme.colors.white3};
-    margin: 8px 0;
+    margin: 6px 0;
+    flex-direction: column;
+    align-items: flex-start;
 
-    div{
-        margin-top: 5px;
+    .date{
+        margin: 0;
+    }
+
+    div, .date{
         display: flex;
         justify-content: center;
         align-items: center;
     }
     h1{
-        margin: 0 7px;
         font-size: 18px;
     }
     p{
         font-size: 12px;
+        width: auto;
+        margin: 0 7px;
     }
 `
 
@@ -46,5 +51,19 @@ export const $Content = styled.div`
 
     .provider{
         font-size: 16px;
+    }
+`
+
+export const $DeleteButton = styled($SelectButton)`
+    background: ${props => props.theme.colors.red};
+`
+
+export const $ButtonsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+    &>*{
+        margin: 0 5px;
     }
 `

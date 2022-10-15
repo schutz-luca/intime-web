@@ -45,9 +45,11 @@ export const $Modal = styled.div`
     z-index: 11;
     
     max-height: 80%;
+    max-width: 70%;
     overflow: auto;
 
     @media ${devices.tablet}{
+        max-width: unset;
         width: 85%;
     }
 `

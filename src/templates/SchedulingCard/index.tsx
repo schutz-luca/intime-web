@@ -2,15 +2,16 @@
  * IMPORTS
  */
 import { useDispatch } from "react-redux";
+import { BiCalendarX } from "react-icons/bi";
 import { Card } from "components/card";
-import { paymentTypes } from "constants/paymentTypes";
+import { $CardContent, $CardTitle, $ButtonsContainer, $DeleteButton, $SelectButton } from "components/card/styles";
+import { Thumbnail } from "components/thumbnail";
 import http from "infra/http";
 import { notify } from "infra/notify";
 import { formatStringDate, getHoursString } from "utils/dateUtils";
-import { nameToValue } from "utils/nameToValue";
 import { ISchedulingCardProps } from "./index.d"
-import { $SelectButton, $Time, $Content, $CardTitle } from "./styles"
-import { Thumbnail } from "components/thumbnail";
+import { $Time } from "./styles"
+import { MdLocalPhone } from "react-icons/md";
 
 /**
  * I am the scheduling card, reactive according to provider view or client view
@@ -45,32 +46,44 @@ export const SchedulingCard = (props: ISchedulingCardProps) => {
         }
     }
 
+    const selectCard = () => props.selectCard({ ...props.scheduling })
+
     return (
-        <Card key={props.scheduling.id}>
-            <$Content>
-                <Thumbnail src={props.scheduling.product.cover} size={"med"} />
-                <div>
+        <Card key={props.scheduling.id} onClick={!props.isProvider && selectCard}>
+            <$CardContent>
+                <Thumbnail src={props.scheduling.product.cover} />
+                <div className="info">
                     <$CardTitle>
                         <h2>{props.scheduling.product.name}</h2>
+                        <$Time>
+                            <div>
+                                <h1>{getHoursString(props.scheduling.startDate)}</h1>
+                                <p>Até</p>
+                                <h1>{getHoursString(props.scheduling.endDate)}</h1>
+                            </div>
+                            <p className="date">{formatStringDate(props.scheduling.startDate)}</p>
+                        </$Time>
+                        {!props.isProvider &&
+                            <>
+                                <p>{provider?.fullname}</p>
+                                <small>{provider?.category?.name}</small>
+                            </>
+                        }
                     </$CardTitle>
-                    <p>{nameToValue(paymentTypes, props.scheduling.payment)}</p>
-                    <$Time>
-                        <h1>{getHoursString(props.scheduling.startDate)}</h1>
-                        <p>Até</p>
-                        <h1>{getHoursString(props.scheduling.endDate)}</h1>
-                        <p>{formatStringDate(props.scheduling.startDate)}</p>
-                    </$Time>
-                    {!props?.isProvider &&
-                        <div>
-                            <p className="provider">{provider?.fullname}</p>
-                        </div>
-                    }
-
-                    <$SelectButton onClick={deleteScheduling}>
-                        Cancelar
-                    </$SelectButton>
+                    <$ButtonsContainer>
+                        <$DeleteButton onClick={deleteScheduling}>
+                            <BiCalendarX />
+                        </$DeleteButton>
+                        {!props?.isProvider &&
+                            <a href={`tel:${props.scheduling.product.provider.phone}`}>
+                                <$SelectButton>
+                                    <MdLocalPhone />
+                                </$SelectButton>
+                            </a>
+                        }
+                    </$ButtonsContainer>
                 </div>
-            </$Content>
+            </$CardContent>
         </Card >
     )
 }

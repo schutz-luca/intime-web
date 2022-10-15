@@ -5,13 +5,12 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Card } from "components/card";
-import { $CardContent } from "components/card/styles";
+import { $CardContent, $CardTitle, $ButtonsContainer, $DeleteButton, $SelectButton} from "components/card/styles";
 import { Thumbnail } from "components/thumbnail";
 import { IProvider } from "constants/types";
 import { notify } from "infra/notify";
 import http from "infra/http";
 import { IServiceCardProps } from "./index.d"
-import { $ButtonsContainer, $CardTitle, $DeleteButton, $SelectButton } from "./styles"
 
 /**
  * I am the service card, reactive according to provider view or client view

@@ -1,7 +1,9 @@
 /**
  * IMPORTS
  */
+import { Button } from "components/button";
 import { motion } from "framer-motion";
+import { ellipsis } from "polished";
 import styled from "styled-components";
 
 export const $Card = styled.div`
@@ -47,4 +49,71 @@ export const $CardContent = styled.div`
         text-align: start;
         overflow: hidden;
     }
+`
+
+export const $CardTitle = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    h2, h3, p, small{
+        ${ellipsis('100%')}
+        width: 100%;
+    }
+
+    h3{
+        font-size: 16px;
+        font-weight: 200;
+    }
+
+    h2{
+        font-size: 22px;
+    }
+    p{
+        font-size: 14px;
+        opacity: 0.9;
+        margin-top: 5px;
+
+        &.description{
+            margin: 0;
+            margin-bottom: 8px;
+        }
+    }
+    
+    small {
+        font-size: 12px;
+        opacity: 0.7;
+    }
+`
+
+export const $SelectButton = styled(Button)`
+    background: ${props => props.theme.colors.green};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+
+    svg{
+         height: 100%;
+         width: 100%;
+    }
+`
+
+
+export const $DeleteButton = styled($SelectButton)`
+    background: ${props => props.theme.colors.red};
+`
+
+export const $ButtonsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+    &>*{
+        margin: 0 5px;
+    }
+
 `

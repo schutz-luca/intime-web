@@ -13,6 +13,7 @@ import { notify } from "infra/notify";
 import { Content } from "layouts/MainLayout/content";
 import { SchedulingCard } from "templates/SchedulingCard";
 import { variants } from "styles/theme";
+import { SchedulingDetails } from "templates/SchedulingDetails";
 
 /**
  * I am the Home Page
@@ -22,7 +23,16 @@ export const ClientSchedulings = () => {
     // get dispatch
     const dispatch = useDispatch();
 
+    // modal states
+    const [isOpen, setIsOpen] = useState(false);
+    const handleModal = (isOpen: boolean) => { setIsOpen(isOpen); }
+    const openCreateModal = (scheduling: IScheduling) => {
+        setIsOpen(true);
+        setSelectedScheduling(scheduling);
+    }
+
     const [schedulings, setSchedulings] = useState<IScheduling[]>([]);
+    const [selectedScheduling, setSelectedScheduling] = useState<IScheduling | null>(null);
 
     const [updateListTrigger, setUpdateListTrigger] = useState(false);
     const updateList = () => { setUpdateListTrigger(!updateListTrigger) };
@@ -54,16 +64,23 @@ export const ClientSchedulings = () => {
                 subtitle="Gerencia sua agenda"
             />
         }>
-            {schedulings.length > 0 ?
-                <$CardContainer variants={variants}>
-                    {schedulings.map(scheduling => <SchedulingCard updateList={updateList} scheduling={scheduling} key={scheduling.id} />)}
-                </$CardContainer>
-                :
-                <EmptyState
-                    description="Não há nenhum agendamento disponível"
-                    icon={FaRobot}
+            <>
+                <SchedulingDetails
+                    isOpen={isOpen}
+                    setIsOpen={handleModal}
+                    scheduling={selectedScheduling}
                 />
-            }
+                {schedulings.length > 0 ?
+                    <$CardContainer variants={variants}>
+                        {schedulings.map(scheduling => <SchedulingCard updateList={updateList} scheduling={scheduling} key={scheduling.id} selectCard={openCreateModal} />)}
+                    </$CardContainer>
+                    :
+                    <EmptyState
+                        description="Não há nenhum agendamento disponível"
+                        icon={FaRobot}
+                    />
+                }
+            </>
         </Content>
     )
 }
