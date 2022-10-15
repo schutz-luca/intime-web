@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { devices } from "styles/devices";
 
 export const $ModalContainer = styled(motion.div)`
     position: fixed;
@@ -45,6 +46,10 @@ export const $Modal = styled.div`
     
     max-height: 80%;
     overflow: auto;
+
+    @media ${devices.tablet}{
+        width: 85%;
+    }
 `
 
 export const $CloseContainer = styled.div`

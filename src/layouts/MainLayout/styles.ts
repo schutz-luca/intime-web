@@ -17,6 +17,8 @@ export const $Content = styled(motion.div)`
     flex-direction: column;
     height: calc(100% - 80px);
     overflow: hidden;
+    height: 100%;
+    
     @media ${devices.tablet} {
         padding: 0;
     }

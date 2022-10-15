@@ -20,6 +20,7 @@ import { addMinutes } from "utils/dateUtils";
 import { ISchedulingModalProps } from "./index.d";
 import { schema } from "./schema"
 import { Row } from "components/form/row";
+import { $Error } from "styles/utils";
 
 /**
  * I am the scheduling modal from
@@ -38,36 +39,47 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
     const watchStartDate = watch("startDate", null);
     const [endDate, setEndState] = useState(null);
     const [available, setAvailable] = useState(true);
+    const [isValidDate, setIsValidDate] = useState(true);
 
     useEffect(() => {
-        setEndState(addMinutes(watchStartDate, service?.duration));
+        const date = new Date(watchStartDate);
+        const now = new Date();
+
+        if (date <= now)
+            setIsValidDate(false)
+
+        else {
+            setEndState(addMinutes(watchStartDate, service?.duration));
+            setIsValidDate(true)
+        }
+
     }, [watchStartDate])
 
     useEffect(() => {
-        (async () => {
-            try {
-                const body = {
-                    startDate: watchStartDate,
-                    endDate,
-                    providerId: service?.provider?.id
+        if (endDate)
+            (async () => {
+                try {
+                    const body = {
+                        startDate: watchStartDate,
+                        endDate,
+                        providerId: service?.provider?.id
+                    }
+
+                    const response = await http.post('scheduling/check', { body, dispatch });
+
+                    if (!response)
+                        throw Error;
+
+                    setAvailable(!!response?.isAvailable);
                 }
-
-                const response = await http.post('scheduling/check', { body, dispatch });
-
-                if (!response)
-                    throw Error;
-
-                setAvailable(!!response?.isAvailable);
-            }
-            catch (ex) {
-                console.log(ex);
-                notify({
-                    title: 'Não foi possível listar os serviços disponíveis',
-                    message: 'Tente novamente mais tarde',
-                    type: 'danger'
-                })
-            }
-        })()
+                catch (ex) {
+                    notify({
+                        title: 'Não foi possível checar se o horário está disponível',
+                        message: 'Tente novamente mais tarde',
+                        type: 'danger'
+                    })
+                }
+            })()
     }, [endDate])
 
     const { id } = useSelector(selectUser);
@@ -142,10 +154,19 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
                     </Field>
                 </Row>
 
-                {(watchStartDate && !available) && "Horário indisponível, por favor tente selecionar um horário diferente"}
+                {watchStartDate &&
+                    <>
+                        {!available &&
+                            <$Error>Horário indisponível, por favor tente selecionar um horário diferente</$Error>
+                        }
+                        {!isValidDate &&
+                            <$Error>Por favor, selecione um horário posterior ao momento atual</$Error>
+                        }
+                    </>
+                }
 
 
-                <Button disabled={isLoading || !available}>
+                <Button disabled={isLoading || !available || !isValidDate}>
                     {isLoading ? 'Criando...' : 'Criar'}
                 </Button>
             </$ModalForm >

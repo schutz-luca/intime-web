@@ -1,3 +1,5 @@
+import styled from "styled-components"
+
 export const ellipsis = `
     display: -webkit-box;
     max-width: 400px;
@@ -7,4 +9,10 @@ export const ellipsis = `
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.625;
+`
+
+export const $Error = styled.div`
+    color: ${props => props.theme.colors.red};
+    margin-top: -20px;
+    margin-bottom: 10px;
 `
