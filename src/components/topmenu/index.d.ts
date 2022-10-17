@@ -6,5 +6,5 @@ export interface IMenuOption {
     label: string
     link: string
     icon: JSX.Element
-    action: () => void
+    action?: () => void
 }
