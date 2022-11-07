@@ -69,16 +69,16 @@ export const ClientHome = () => {
                 setIsOpen={handleModal}
                 service={selectedService}
             />
-            <$CardContainer variants={variants}>
-                {services.length > 0 ?
-                    services.map(service => <ServiceCard selectCard={openCreateModal} service={service} key={service.id}/>)
-                    :
-                    <EmptyState
-                        description="Não há nenhum serviço disponível"
-                        icon={FaRobot}
-                    />
-                }
-            </$CardContainer>
+            {services.length > 0 ?
+                <$CardContainer variants={variants}>
+                    {services.map(service => <ServiceCard selectCard={openCreateModal} service={service} key={service.id} />)}
+                </$CardContainer>
+                :
+                <EmptyState
+                    description="Não há nenhum serviço disponível"
+                    icon={FaRobot}
+                />
+            }
         </Content>
     )
 }

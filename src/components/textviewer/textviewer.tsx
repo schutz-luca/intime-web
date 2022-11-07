@@ -1,10 +1,9 @@
 /**
  * IMPORTS
  */
-import { $SelectButton } from "components/card/styles";
 import { MdContentCopy } from "react-icons/md";
 import { nullToString } from "utils/nullToString";
-import { $TextContainer, $Label, $Text } from "./styles";
+import { $TextContainer, $Label, $Text, $CopyButton } from "./styles";
 import { ITextViewerProps } from "./textviewer.d";
 
 /**
@@ -20,9 +19,9 @@ const TextViewer = (props: ITextViewerProps) => {
                 <$Text>
                     {nullToString(props.text)}
                     {props?.copyButton &&
-                        <$SelectButton onClick={copy}>
+                        <$CopyButton onClick={copy}>
                             <MdContentCopy />
-                        </$SelectButton>
+                        </$CopyButton>
                     }
                 </$Text>
             }

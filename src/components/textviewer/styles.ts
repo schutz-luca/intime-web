@@ -29,7 +29,30 @@ export const $Text = styled.div`
 
     button{
         margin-left: 10px;
-        background: ${props=>props.theme.neutral6}90;
+        background: ${props => props.theme.neutral6}90;
+    }
+`
+
+export const $CopyButton = styled.div`
+    background: ${props => props.theme.colors.gray2}90;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    margin-left: 5px;
+
+    svg{
+        color: ${props => props.theme.colors.white3};
+         height: 100%;
+         width: 100%;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background: ${props => props.theme.primary}90;
     }
 `
 

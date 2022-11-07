@@ -27,7 +27,8 @@ export const $ModalForm = styled.form`
     flex-direction: column;
     gap: 10px;
     text-align: center;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     &>*{
         width: 100%;

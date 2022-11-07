@@ -21,6 +21,7 @@ import { ISchedulingModalProps } from "./index.d";
 import { schema } from "./schema"
 import { Row } from "components/form/row";
 import { $Error } from "styles/utils";
+import { TextViewer } from "components/textviewer";
 
 /**
  * I am the scheduling modal from
@@ -40,6 +41,8 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
     const [endDate, setEndState] = useState(null);
     const [available, setAvailable] = useState(true);
     const [isValidDate, setIsValidDate] = useState(true);
+
+    const address = service?.provider.address;
 
     useEffect(() => {
         const date = new Date(watchStartDate);
@@ -126,6 +129,11 @@ export const SchedulingModal = (props: ISchedulingModalProps) => {
             <$ModalForm onSubmit={handleSubmit(onSubmit)}>
                 <p>Agendar</p>
                 <h1>{service?.name}</h1>
+                <p>{service?.description}</p><br />
+                <h3>R$ {service?.price}</h3>
+                <small>{service?.provider?.fullname}</small>
+                <TextViewer label="Endereço" text={`${address?.street}, ${address?.number} - ${address?.district}, ${address?.city} - ${address?.state}`} copyButton={true} />
+
                 <Field error={errors.payment?.message} label="Pagamento">
                     <Select
                         name="payment"
