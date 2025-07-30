@@ -72,4 +72,6 @@ To run the web app properly you will have to setup the [inTime API](https://gith
 
 ## 📄 License
 
-The MIT License (MIT)
+This project is licensed under a **custom MIT-based license**
+
+See [LICENSE](./LICENSE) for full terms.
